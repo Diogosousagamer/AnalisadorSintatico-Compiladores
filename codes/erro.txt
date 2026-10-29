@@ -1,0 +1,24 @@
+program erro;
+var x,y,resultado,opcao: integer;
+var caractere: char;
+
+/* inicio do programa */
+begin 
+	caractere := 'ab';
+
+	writeln("Numero X:);
+	read(x);
+
+	writeln("Numero Y:);
+	read(y);
+
+	writeln("Deseja realizar: 1 - Soma; 2 - Subtracao");
+	read(opcao);
+
+	if (opcao = 1.) then
+		resultado := x + y;
+	else
+		resultado := x - y;
+
+	writeln(resultado);
+end.

@@ -1,0 +1,17 @@
+program teste;
+var x,y: integer;
+
+/* inicio do 
+programa */
+begin 
+	read(x);
+	read(y);
+
+	if (x > y) then
+		y := x;
+	else
+		y := -x;
+	
+	writeln(x);
+	writeln(y);
+end
