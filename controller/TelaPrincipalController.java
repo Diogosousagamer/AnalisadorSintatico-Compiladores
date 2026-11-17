@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 02/09/2026
-* Ultima alteracao...: 02/10/2026
+* Inicio.............: 21/10/2026
+* Ultima alteracao...: 17/11/2026
 * Nome...............: TelaPrincipalController
 * Funcao.............: Classe que gerencia as operacoes da TelaPrincipal.
                      
@@ -20,6 +20,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import model.AnalisadorLexico;
+import model.AnalisadorSintatico;
+import model.RegistroErro;
 import model.Token;
 import model.TuplaLexema;
 
@@ -41,12 +43,14 @@ public class TelaPrincipalController {
 	@FXML private Button btnVoltar;
 	@FXML private TextArea txtCodigo;
 	@FXML private TextArea txtErros;
-	@FXML private TextArea txtResultados;
+	@FXML private TextArea txtLexico;
+	@FXML private TextArea txtSintatico;
 
 	// Variaveis e instancias
-	private AnalisadorLexico analisadorLexico;
+	private AnalisadorSintatico analisadorSintatico;
 	private File codigo;
 	private File arquivoSaida;
+	private ArrayList<RegistroErro> erros = new ArrayList<>();
 
 	/*
      * ***************************************************************
@@ -121,8 +125,17 @@ public class TelaPrincipalController {
 		}
 	}
 
-	public void exibirErro(int linha, String erro) {
-		txtErros.appendText("Linha (" + Integer.toString(linha) + "): " + erro + "\n");
+	public void registrarErro(RegistroErro erro) {
+		erros.add(erro);
+		erros.sort(Comparator.comparingInt(RegistroErro::getLinha));
+	}
+
+	public void exibirErros() {
+		if (!erros.isEmpty()) {
+			for (RegistroErro e : erros) {
+				txtErros.appendText("Linha (" + Integer.toString(e.getLinha()) + "): " + e.getErro() + "\n");
+			}
+		}
 	}
 
 	/*
@@ -137,16 +150,16 @@ public class TelaPrincipalController {
 		// Carrega o arquivo de codigo
 		this.codigo = codigo;
 
-		// Inicializa o analisador lexico
-		analisadorLexico = new AnalisadorLexico(this);
+		// Inicializa o analisador sintatico
+		analisadorSintatico = new AnalisadorSintatico(this);
 
 		Platform.runLater(() -> {
 			// Escreve o codigo fonte dentro da interface
 			escreverCodigo();
-
-			// Realiza a analise lexica do codigo
-			realizarAnalise();
 		});
+
+		// Realiza a analise
+		analisadorSintatico.analisarCodigo(codigo);
 	}
 
 	/*
@@ -177,27 +190,28 @@ public class TelaPrincipalController {
 
 	/*
      * ***************************************************************
-     * Metodo: realizarAnalise
-     * Funcao: realiza a analise do codigo
+     * Metodo: realizarAnaliseLexica
+     * Funcao: realiza a analise lexica do codigo
      * Parametros: nenhum parametro foi definido para esta funcao
      * Retorno: void
      ****************************************************************/
 
-	private void realizarAnalise() {
-		// Obtem a lista de tuplas a partir da analise lexica
-		ArrayList<TuplaLexema> tuplas = analisadorLexico.analisarCodigo(codigo);
-
+	public void realizarAnaliseLexica(ArrayList<TuplaLexema> tuplas) {
 		// Se tivermos obtido tuplas
 		if (!tuplas.isEmpty()) {			
 			for (TuplaLexema t : tuplas) {
 				// Formata a tupla contendo o lexema e o token, concatenando-a dentro do txtResultados
 				String tupla = "<" + t.getLexema() + ", " + obterSimboloToken(t.getToken()) + ">";
-				txtResultados.appendText(tupla + "\n");
+				txtLexico.appendText(tupla + "\n");
 			}
 
 			// Usa as informacoes obtidas para gerar o arquivo de saida
 			escreverArquivoSaida();
 		}
+	}
+
+	public void imprimirResultadoSintatico(String res) {
+		txtSintatico.appendText(res + "\n");
 	}
 
 	/*
@@ -209,8 +223,8 @@ public class TelaPrincipalController {
      ****************************************************************/
 
 	private void escreverArquivoSaida() {
-		// Obtem as tuplas listadas no txtResultados
-		String tuplas = txtResultados.getText();
+		// Obtem as tuplas listadas no resultado da analise lexica
+		String tuplas = txtLexico.getText();
 
 		// Se a lista de tuplas nao estiver vazia e o arquivo do codigo fonte nao for nulo
 		if (!tuplas.isEmpty() && codigo != null) {

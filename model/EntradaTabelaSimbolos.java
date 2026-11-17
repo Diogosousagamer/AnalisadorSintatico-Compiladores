@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 02/10/2026
-* Ultima alteracao...: 02/10/2026
+* Inicio.............: 21/10/2026
+* Ultima alteracao...: 21/10/2026
 * Nome...............: EntradaTabelaSimbolos
 * Funcao.............: Classe que representa uma entrada na tabela de simbolos.
                      

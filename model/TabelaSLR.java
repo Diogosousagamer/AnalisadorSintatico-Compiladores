@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 21/10/2026
-* Ultima alteracao...: 21/10/2026
+* Inicio.............: 01/11/2026
+* Ultima alteracao...: 17/11/2026
 * Nome...............: TabelaSLR
 * Funcao.............: Classe que designa as operacoes da tabela SLR da gramatica do Analisador Sintatico do Mini Pascal.
                      
@@ -17,7 +17,7 @@ import java.util.Hashtable;
 
 public class TabelaSLR {
     private Hashtable<Integer, Hashtable<String, String>> entradasTerminais;
-    private Hashtable<Integer, Hashtable<String, Integer>> entradasTransicoes;
+    private Hashtable<Integer, Hashtable<String, Integer>> entradasNaoTerminais;
 
     public TabelaSLR() {
         this.iniciarTabela();
@@ -32,8 +32,16 @@ public class TabelaSLR {
            entradasNaoTerminais.putIfAbsent(i, new Hashtable<>());
         }
 
-         preencherTerminais():
+         preencherTerminais();
          preencherNaoTerminais();
+    }
+
+    public String pesquisarAcao(int estado, String terminal) {
+        return entradasTerminais.get(estado).get(terminal);
+    }
+
+    public int pesquisarTransicao(int estado, String naoTerminal) {
+        return entradasNaoTerminais.get(estado).get(naoTerminal);
     }
    
     private void preencherTerminais() {
@@ -52,7 +60,7 @@ public class TabelaSLR {
         // Entradas do estado 4
         entradasTerminais.get(4).putIfAbsent("var", "e4");
         entradasTerminais.get(4).putIfAbsent("procedure", "r4");
-         entradasTerminais.get(4).putIfAbsent("begin", "r4");
+        entradasTerminais.get(4).putIfAbsent("begin", "r4");
 
         // Entradas do estado 5
         entradasTerminais.get(5).putIfAbsent(".", "e5");
@@ -93,7 +101,7 @@ public class TabelaSLR {
 
        // Entradas do estado 16
        entradasTerminais.get(16).putIfAbsent(";", "r2");
-       entradasTerminais.get(16).putIfAbsent(“.”, "r2");
+       entradasTerminais.get(16).putIfAbsent(".", "r2");
 
        // Entradas do estado 17
        entradasTerminais.get(17).putIfAbsent("begin", "e17");

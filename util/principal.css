@@ -63,3 +63,36 @@
 #redondo {
 	-fx-background-radius: 15px;
 }
+
+.painelTab .tab-header-area .tab-header-background {
+	-fx-background-color: transparent;
+}
+
+.painelTab .tab {
+	-fx-background-color: #ffffff;
+	-fx-padding: 5px;
+	-fx-margin: 5px;
+}
+
+.painel .tab .tab-label {
+	-fx-font-family: 'VCR OSD Mono';
+	-fx-font-size: 14px;
+	-fx-text-fill: #2bf080;
+}
+
+.painelTab .tab:hover {
+	-fx-background-color: #2bf080;
+	-fx-cursor: hand;
+}
+
+.painelTab .tab:selected {
+	-fx-background-color: #2bf080;
+}
+
+.painelTab .tab:hover .tab-label {
+	-fx-text-fill: white;
+}
+
+.painelTab .tab:selected .tab-label {
+	-fx-text-fill: white;
+}

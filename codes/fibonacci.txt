@@ -8,7 +8,7 @@ begin
 	anterior1 := 1;
 	anterior2 := 0;
 
-	if n <> 0 and n <> 1 then
+	if (n <> 0 and n <> 1) then
 		for i := 2 to n do
 			soma := anterior1 + anterior2;
 			anterior2 := anterior1;

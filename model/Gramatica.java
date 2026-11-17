@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 21/10/2026
-* Ultima alteracao...: 21/10/2026
+* Inicio.............: 01/11/2026
+* Ultima alteracao...: 01/11/2026
 * Nome...............: Gramatica
 * Funcao.............: Classe que representa a gramatica da linguagem Mini Pascal.
                      
@@ -22,7 +22,7 @@ public class Gramatica {
 	}
 
 	private void inicializarGramatica() {
-		regrasProducao = new RegraProducao<>();
+		regrasProducao = new Hashtable<>();
 
 		regrasProducao.putIfAbsent(0, new RegraProducao("P'", "P"));
 		regrasProducao.putIfAbsent(1, new RegraProducao("P", "program ident ; B ."));
@@ -37,7 +37,7 @@ public class Gramatica {
 	    regrasProducao.putIfAbsent(10, new RegraProducao("PROC_LIST", "PROC PROC_LIST"));
 	    regrasProducao.putIfAbsent(11, new RegraProducao("PROC_LIST", "e"));
 	    regrasProducao.putIfAbsent(12, new RegraProducao("PROC", "procedure ident PA_LIST ; B ;"));
-	    regrasProducao.putIfAbsent(13, new RegraProducao("PA_LIST", "(PA_DECL_LIST)"));
+	    regrasProducao.putIfAbsent(13, new RegraProducao("PA_LIST", "( PA_DECL_LIST )"));
 	    regrasProducao.putIfAbsent(14, new RegraProducao("PA_LIST", "e"));
 	    regrasProducao.putIfAbsent(15, new RegraProducao("PA_DECL_LIST", "PA_DECL ; PA_DECL_LIST"));
 	    regrasProducao.putIfAbsent(16, new RegraProducao("PA_DECL_LIST", "PA_DECL"));
@@ -55,7 +55,7 @@ public class Gramatica {
 	    regrasProducao.putIfAbsent(28, new RegraProducao("C", "C_SEC"));
 	    regrasProducao.putIfAbsent(29, new RegraProducao("VAR_ATR", "variavel := EXPR"));
 	    regrasProducao.putIfAbsent(30, new RegraProducao("PROC_CA", "proc PROC_ARGS"));
-	    regrasProducao.putIfAbsent(31, new RegraProducao("PROC_ARGS", "(E_LIST)"));
+	    regrasProducao.putIfAbsent(31, new RegraProducao("PROC_ARGS", "( E_LIST )"));
 	    regrasProducao.putIfAbsent(32, new RegraProducao("PROC_ARGS", "e"));
 	    regrasProducao.putIfAbsent(33, new RegraProducao("E_LIST", "EXPR , E_LIST"));
 	    regrasProducao.putIfAbsent(34, new RegraProducao("E_LIST", "EXPR"));
@@ -77,7 +77,7 @@ public class Gramatica {
 	    regrasProducao.putIfAbsent(50, new RegraProducao("TERM", "F"));
 	    regrasProducao.putIfAbsent(51, new RegraProducao("F", "numero"));
 	    regrasProducao.putIfAbsent(52, new RegraProducao("F", "variavel"));
-	    regrasProducao.putIfAbsent(53, new RegraProducao("F", "(EXPR)"));
+	    regrasProducao.putIfAbsent(53, new RegraProducao("F", "( EXPR )"));
 	    regrasProducao.putIfAbsent(54, new RegraProducao("F", "not F"));
 	    regrasProducao.putIfAbsent(55, new RegraProducao("SIGN_OPT", "+"));
 	    regrasProducao.putIfAbsent(56, new RegraProducao("SIGN_OPT", "-"));
@@ -97,13 +97,7 @@ public class Gramatica {
 	    regrasProducao.putIfAbsent(70, new RegraProducao("LOG_OP_OR_XOR", "xor"));
 	}
 
-	class RegraProducao {
-		private String naoTerminal;
-		private String producao;
-
-		public RegraProducao(String naoTerminal, String producao) {
-			this.naoTerminal = naoTerminal;
-			this.producao = producao;
-		}
+	public RegraProducao obterRegraProducao(int numeroRegra) {
+		return regrasProducao.get(numeroRegra);
 	}
 }

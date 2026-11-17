@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 19/08/2026
-* Ultima alteracao...: 13/09/2026
+* Inicio.............: 21/10/2026
+* Ultima alteracao...: 21/10/2026
 * Nome...............: Estado
 * Funcao.............: Classe que designa as operacoes de um estado em um automato.
                      
