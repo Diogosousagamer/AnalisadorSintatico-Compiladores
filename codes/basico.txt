@@ -1,0 +1,3 @@
+program basico
+begin
+end.

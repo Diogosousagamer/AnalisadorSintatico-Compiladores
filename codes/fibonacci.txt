@@ -1,8 +1,7 @@
 program fibonacci;
-var n, anterior1, anterior2, soma: integer;
+var n, anterior1, anterior2, soma, i: integer;
 
 begin
-	writeln("Qual e o n-esimo numero que deseja calcular");
 	read(n);
 
 	anterior1 := 1;
@@ -10,14 +9,16 @@ begin
 
 	if (n <> 0 and n <> 1) then
 		for i := 2 to n do
-			soma := anterior1 + anterior2;
-			anterior2 := anterior1;
-			anterior1 := soma;
+			begin
+				soma := anterior1 + anterior2;
+				anterior2 := anterior1;
+				anterior1 := soma;
+			end
 	else
 		if n = 0 then
 			soma := anterior2;
 		else
 			soma := anterior1;
 
-	writeln("Numero obtido: " + soma);
+	writeln(soma);
 end.	

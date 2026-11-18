@@ -36,12 +36,33 @@ public class TabelaSLR {
          preencherNaoTerminais();
     }
 
-    public String pesquisarAcao(int estado, String terminal) {
-        return entradasTerminais.get(estado).get(terminal);
+    public String pesquisarAcao(Integer estado, String terminal) {
+        String acao = null;
+
+        if (estado != null) {
+            Hashtable<String, String> acoes = entradasTerminais.get(estado);
+
+            if (acoes != null && terminal != null) {
+                acao = acoes.get(terminal);
+            }
+        }
+
+        return acao;
     }
 
-    public int pesquisarTransicao(int estado, String naoTerminal) {
-        return entradasNaoTerminais.get(estado).get(naoTerminal);
+    public int pesquisarTransicao(Integer estado, String naoTerminal) {
+        Integer novoEstado = null;
+
+        if (estado != null) {
+            Hashtable<String, Integer> entradas = entradasNaoTerminais.get(estado);
+
+            if (entradas != null && naoTerminal != null) {
+                novoEstado = entradas.get(naoTerminal);
+                if (novoEstado == null) novoEstado = -1;
+            }
+        }
+
+        return novoEstado;
     }
    
     private void preencherTerminais() {
@@ -58,7 +79,7 @@ public class TabelaSLR {
         entradasTerminais.get(3).putIfAbsent(";", "e4");
 
         // Entradas do estado 4
-        entradasTerminais.get(4).putIfAbsent("var", "e4");
+        entradasTerminais.get(4).putIfAbsent("var", "e7");
         entradasTerminais.get(4).putIfAbsent("procedure", "r4");
         entradasTerminais.get(4).putIfAbsent("begin", "r4");
 

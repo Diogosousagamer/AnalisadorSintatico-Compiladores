@@ -49,10 +49,12 @@ public class AnalisadorSintatico {
 		
 		for (int i = 0; i < tabelaSimbolos.size(); i++) {
 			EntradaTabelaSimbolos e = tabelaSimbolos.get(i);
-			proximaEntrada = tabelaSimbolos.get(i + 1);
+			proximaEntrada = (i + 1 < tabelaSimbolos.size()) ? tabelaSimbolos.get(i + 1) : null;
 			String lexema = identificarLexema(e, ultimaEntrada, proximaEntrada);
 			int estadoAtual = Integer.parseInt(pilha.peek());
 			String acao = tabelaSLR.pesquisarAcao(estadoAtual, lexema);
+			final int estado = estadoAtual;
+			Platform.runLater(() -> controller.imprimirResultadoSintatico("Lexema: " + lexema + " Estado atual: " + estado + " Acao: " + acao)); 
 
 			if (acao != null) {
 				if (acao.equals("OK")) {
@@ -68,34 +70,36 @@ public class AnalisadorSintatico {
 				else if (acao.startsWith("r")) {
 					int numeroRegra = Integer.parseInt(acao.substring(1));
 					estadoAtual = reduzir(pilha, numeroRegra);
-					String naoTerminal = pilha.peek();
-					i--;
+					RegraProducao regra = gramatica.obterRegraProducao(numeroRegra);
+					String naoTerminal = regra.getNaoTerminal();
+					if (!regra.getProducao().equals("e")) i--;
 
 					if (estadoAtual != -1) {
 						String novoEstado = Integer.toString(tabelaSLR.pesquisarTransicao(estadoAtual, naoTerminal));
 
-						if (novoEstado != null) {
+						if (!novoEstado.equals("-1")) {
+							pilha.push(naoTerminal);
 							pilha.push(novoEstado);
 							ultimaEntrada = e;
 						}
 						else {
 							temErro = true;
-							controller.registrarErro(new RegistroErro(e.getLinha(), "Transição incompleta! " + lexema));
+							controller.registrarErro(new RegistroErro(e.getLinha(), "Transicao incompleta! " + lexema));
 						}
 					}
 					else {
 						temErro = true;
-						controller.registrarErro(new RegistroErro(e.getLinha(), "Redução incompleta! " + lexema));
+						controller.registrarErro(new RegistroErro(e.getLinha(), "Reducao incompleta! " + lexema));
 					}
 				}
 			}
 			else {
 				temErro = true;
-				controller.registrarErro(new RegistroErro(e.getLinha(), "Ação não encontrada! " + lexema));
+				controller.registrarErro(new RegistroErro(e.getLinha(), "Acao nao encontrada! " + lexema));
 			}
 		}
 
-		if (temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("ERRO na cadeia sintática!"));
+		if (temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("ERRO na cadeia sintatica!"));
 		controller.exibirErros();
 	}
 
@@ -105,14 +109,13 @@ public class AnalisadorSintatico {
 
 		if (regra != null) {
 			String[] producao = regra.getProducao().split(" ");
-			int tamanho = producao.length * 2;
+			int tamanho = (!regra.getProducao().equals("e")) ? producao.length * 2 : 0;
 
 			for (int i = 0; i < tamanho; i++) {
 				pilha.pop();
 			}
 
 			estadoAtual = Integer.parseInt(pilha.peek());
-			pilha.push(regra.getNaoTerminal());
 		}
 
 		return estadoAtual;
@@ -123,46 +126,48 @@ public class AnalisadorSintatico {
 		Token token = entrada.getToken();
 		String lexema = entrada.getLexema();
 
-		switch (token) {
-			case IDENTIFICADOR:
-				if (ultimaEntrada != null && ultimaEntrada.getToken() == Token.PALAVRA_RESERVADA && 
-					(ultimaEntrada.getLexema().equals("var") 
-					|| ultimaEntrada.getLexema().equals("procedure")
-				    || ultimaEntrada.getLexema().equals("program"))) {
-					terminal = "ident";
-				}
-				else if (proximaEntrada != null && (proximaEntrada.getLexema().equals("(") 
-					|| proximaEntrada.getLexema().equals(""))) {
-					terminal = "proc";
-				}
-				else {
-					terminal = "variavel";
-				}
+		if (token != null && lexema != null) {
+			switch (token) {
+				case IDENTIFICADOR:
+					if (ultimaEntrada != null && ultimaEntrada.getToken() == Token.PALAVRA_RESERVADA && 
+						(ultimaEntrada.getLexema().equals("var") 
+						|| ultimaEntrada.getLexema().equals("procedure")
+					    || ultimaEntrada.getLexema().equals("program"))) {
+						terminal = "ident";
+					}
+					else if (proximaEntrada != null && (proximaEntrada.getLexema().equals("(") 
+						|| proximaEntrada.getLexema().equals(""))) {
+						terminal = "proc";
+					}
+					else {
+						terminal = "variavel";
+					}
 
-				break;
+					break;
 
-			case PALAVRA_RESERVADA:
-				if (lexema.equals("integer") || lexema.equals("real")) {
-					terminal = "tipo";
-				}
-				else {
+				case PALAVRA_RESERVADA:
+					if (lexema.equals("integer") || lexema.equals("real")) {
+						terminal = "tipo";
+					}
+					else {
+						terminal = lexema;
+					}
+
+					break;
+
+				case CONSTANTE_NUMERICA:
+					terminal = "numero";
+					break;
+
+				case SIMBOLO_ESPECIAL:
+				case OPERADOR_ARITMETICO:
+				case OPERADOR_LOGICO:
+				case OPERADOR_RELACIONAL:
+				case OPERADOR_ATRIBUICAO:
 					terminal = lexema;
-				}
+					break;
 
-				break;
-
-			case CONSTANTE_NUMERICA:
-				terminal = "numero";
-				break;
-
-			case SIMBOLO_ESPECIAL:
-			case OPERADOR_ARITMETICO:
-			case OPERADOR_LOGICO:
-			case OPERADOR_RELACIONAL:
-			case OPERADOR_ATRIBUICAO:
-				terminal = lexema;
-				break;
-
+			}
 		}
 
 		return terminal;
