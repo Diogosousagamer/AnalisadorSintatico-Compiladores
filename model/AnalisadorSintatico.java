@@ -39,6 +39,7 @@ public class AnalisadorSintatico {
 
 		ArrayList<EntradaTabelaSimbolos> tabelaSimbolos = analisadorLexico.getTabelaSimbolos();
 		tabelaSimbolos.add(new EntradaTabelaSimbolos("$", null, -1));
+		StringBuilder log = new StringBuilder();
 
 		Deque<String> pilha = new ArrayDeque<>();
 		pilha.push("0");
@@ -69,11 +70,13 @@ public class AnalisadorSintatico {
 			String acao = tabelaSLR.pesquisarAcao(estadoAtual, lexema);
 			final int estado = estadoAtual;
 
-			Platform.runLater(() -> controller.imprimirResultadoSintatico("Lexema: " + lexema + " Estado atual: " + estado + " Acao: " + acao)); 
+			log.append("Lexema: ").append(lexema)
+		   	   .append(" Estado atual: ").append(estadoAtual)
+		       .append(" Acao: ").append(acao).append("\n");
 
 			if (acao != null) {
 				if (acao.equals("OK")) {
-					if (!temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("\nCadeia reconhecida!"));
+					if (!temErro) log.append("\nCadeia reconhecida!");
 					break;
 				}
 				else if (acao.startsWith("e")) {
@@ -112,7 +115,9 @@ public class AnalisadorSintatico {
 			}
 		}
 
-		if (temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("\nERRO na cadeia sintatica!"));
+		if (temErro) log.append("\nERRO na cadeia sintatica!");
+		final String resultado = log.toString();
+		Platform.runLater(() -> controller.imprimirResultadoSintatico(resultado));
 		controller.exibirErros();
 	}
 

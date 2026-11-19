@@ -142,6 +142,8 @@ public class TabelaSLR {
 
         // Estado 20
         entradasTerminais.get(20).putIfAbsent("ident", "e15");
+        entradasTerminais.get(20).putIfAbsent("begin", "r6");
+        entradasTerminais.get(20).putIfAbsent("procedure", "r6");
 
         // Estado 21
         entradasTerminais.get(21).putIfAbsent("tipo", "e39");
@@ -212,6 +214,7 @@ public class TabelaSLR {
         entradasTerminais.get(39).putIfAbsent("end", "r7");
 
         // Estado 40
+        entradasTerminais.get(40).putIfAbsent(":", "r8");
         entradasTerminais.get(40).putIfAbsent(";", "r8");
 
         // Estado 41
