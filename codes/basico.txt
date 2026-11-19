@@ -1,3 +1,4 @@
-program basico
+program basico;
+
 begin
 end.

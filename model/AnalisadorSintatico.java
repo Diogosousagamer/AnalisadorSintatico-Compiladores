@@ -44,35 +44,49 @@ public class AnalisadorSintatico {
 		pilha.push("0");
 
 		boolean temErro = false;
-		EntradaTabelaSimbolos ultimaEntrada = null;
 		EntradaTabelaSimbolos proximaEntrada = null;
+
+		boolean ehDeclaracao = false;
 		
 		for (int i = 0; i < tabelaSimbolos.size(); i++) {
 			EntradaTabelaSimbolos e = tabelaSimbolos.get(i);
 			proximaEntrada = (i + 1 < tabelaSimbolos.size()) ? tabelaSimbolos.get(i + 1) : null;
-			String lexema = identificarLexema(e, ultimaEntrada, proximaEntrada);
+
+			String lex = e.getLexema();
+
+			if (lex != null) {
+				if (lex.equals("var") || lex.equals("procedure") || lex.equals("program")) {
+					ehDeclaracao = true;
+				}
+				else if (lex.equals(":") || lex.equals("begin")) {
+					ehDeclaracao = false;
+				}
+			}
+
+			String lexema = identificarLexema(e, proximaEntrada, ehDeclaracao);
+
 			int estadoAtual = Integer.parseInt(pilha.peek());
 			String acao = tabelaSLR.pesquisarAcao(estadoAtual, lexema);
 			final int estado = estadoAtual;
+
 			Platform.runLater(() -> controller.imprimirResultadoSintatico("Lexema: " + lexema + " Estado atual: " + estado + " Acao: " + acao)); 
 
 			if (acao != null) {
 				if (acao.equals("OK")) {
-					if (!temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("Cadeia reconhecida!"));
+					if (!temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("\nCadeia reconhecida!"));
 					break;
 				}
 				else if (acao.startsWith("e")) {
 					pilha.push(lexema);
 					String novoEstado = acao.substring(1);
 					pilha.push(novoEstado);
-					ultimaEntrada = e;
 				}
 				else if (acao.startsWith("r")) {
 					int numeroRegra = Integer.parseInt(acao.substring(1));
 					estadoAtual = reduzir(pilha, numeroRegra);
 					RegraProducao regra = gramatica.obterRegraProducao(numeroRegra);
 					String naoTerminal = regra.getNaoTerminal();
-					if (!regra.getProducao().equals("e")) i--;
+					i--;
 
 					if (estadoAtual != -1) {
 						String novoEstado = Integer.toString(tabelaSLR.pesquisarTransicao(estadoAtual, naoTerminal));
@@ -80,7 +94,6 @@ public class AnalisadorSintatico {
 						if (!novoEstado.equals("-1")) {
 							pilha.push(naoTerminal);
 							pilha.push(novoEstado);
-							ultimaEntrada = e;
 						}
 						else {
 							temErro = true;
@@ -99,7 +112,7 @@ public class AnalisadorSintatico {
 			}
 		}
 
-		if (temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("ERRO na cadeia sintatica!"));
+		if (temErro) Platform.runLater(() -> controller.imprimirResultadoSintatico("\nERRO na cadeia sintatica!"));
 		controller.exibirErros();
 	}
 
@@ -121,22 +134,22 @@ public class AnalisadorSintatico {
 		return estadoAtual;
 	}
 
-	private String identificarLexema(EntradaTabelaSimbolos entrada, EntradaTabelaSimbolos ultimaEntrada, EntradaTabelaSimbolos proximaEntrada) {
+	private String identificarLexema(EntradaTabelaSimbolos entrada, EntradaTabelaSimbolos proximaEntrada, boolean ehDeclaracao) {
 		String terminal = "";
 		Token token = entrada.getToken();
 		String lexema = entrada.getLexema();
 
+		if (lexema != null && lexema.equals("$")) {
+			return lexema;
+		}
+
 		if (token != null && lexema != null) {
 			switch (token) {
 				case IDENTIFICADOR:
-					if (ultimaEntrada != null && ultimaEntrada.getToken() == Token.PALAVRA_RESERVADA && 
-						(ultimaEntrada.getLexema().equals("var") 
-						|| ultimaEntrada.getLexema().equals("procedure")
-					    || ultimaEntrada.getLexema().equals("program"))) {
+					if (ehDeclaracao) {
 						terminal = "ident";
 					}
-					else if (proximaEntrada != null && (proximaEntrada.getLexema().equals("(") 
-						|| proximaEntrada.getLexema().equals(""))) {
+					else if (proximaEntrada != null && proximaEntrada.getLexema().equals("(")) {
 						terminal = "proc";
 					}
 					else {
