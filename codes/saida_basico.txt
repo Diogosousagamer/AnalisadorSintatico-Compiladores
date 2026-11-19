@@ -1,6 +1,0 @@
-<program, palavra_reservada>
-<basico, id>
-<;, simbolo_especial>
-<begin, palavra_reservada>
-<end, palavra_reservada>
-<., simbolo_especial>

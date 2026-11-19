@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 01/11/2026
-* Ultima alteracao...: 17/11/2026
+* Ultima alteracao...: 19/11/2026
 * Nome...............: AnalisadorSintatico
 * Funcao.............: Classe que designa as operacoes do analisador sintatico de um compilador.
                      
@@ -76,7 +76,6 @@ public class AnalisadorSintatico {
 
 			if (acao != null) {
 				if (acao.equals("OK")) {
-					if (!temErro) log.append("\nCadeia reconhecida!");
 					break;
 				}
 				else if (acao.startsWith("e")) {
@@ -113,13 +112,26 @@ public class AnalisadorSintatico {
 				temErro = true;
 				controller.registrarErro(new RegistroErro(e.getLinha(), "Acao nao encontrada! " + lexema));
 			}
+
+			// System.out.println(pilha.peek());
 		}
 
-		if (temErro) log.append("\nERRO na cadeia sintatica!");
+		// Retorna que houve erro na cade
+		String erro = (temErro) ? "ERRO na cadeia sintática!\n\n" : "Cadeia reconhecida!\n\n";
 		final String resultado = log.toString();
 		Platform.runLater(() -> controller.imprimirResultadoSintatico(resultado));
 		controller.exibirErros();
 	}
+
+	/*
+     * ***************************************************************
+     * Metodo: reduzir
+     * Funcao: aplica a acao de reducao dentro da pilha SLR(1) e retorna
+     		   um novo estado obtido
+     * Parametros: Deque<String> pilha - pilha do analisador
+     			   int numeroRegra - numero da regra a ser reduzida
+     * Retorno: int
+     ****************************************************************/
 
 	private int reduzir(Deque<String> pilha, int numeroRegra) {
 		RegraProducao regra = gramatica.obterRegraProducao(numeroRegra);
@@ -138,6 +150,16 @@ public class AnalisadorSintatico {
 
 		return estadoAtual;
 	}
+
+	/*
+     * ***************************************************************
+     * Metodo: identificarLexema
+     * Funcao: identifica o tipo de lexema a ser computado pela analise sintatica
+     * Parametros: EntradaTabelaSimbolos entrada - entrada a ser computada
+     			   EntradaTabelaSimbolos proximaEntrada - proxima entrada a ser computada
+     			   boolean ehDeclaracao - sinaliza se eh uma declaracao de variavel
+     * Retorno: void
+     ****************************************************************/
 
 	private String identificarLexema(EntradaTabelaSimbolos entrada, EntradaTabelaSimbolos proximaEntrada, boolean ehDeclaracao) {
 		String terminal = "";

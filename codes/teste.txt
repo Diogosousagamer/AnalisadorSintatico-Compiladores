@@ -14,4 +14,4 @@ begin
 	
 	writeln(x);
 	writeln(y);
-end
+end.

@@ -4,13 +4,8 @@ var x,y,resultado,opcao: integer;
 /* inicio do 
 programa */
 begin 
-	writeln("Numero X:");
 	read(x);
-
-	writeln("Numero Y:");
 	read(y);
-
-	writeln("Deseja realizar: 1 - Soma; 2 - Subtracao");
 	read(opcao);
 
 	if (opcao = 1) then

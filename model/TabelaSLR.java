@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 01/11/2026
-* Ultima alteracao...: 17/11/2026
+* Ultima alteracao...: 19/11/2026
 * Nome...............: TabelaSLR
 * Funcao.............: Classe que designa as operacoes da tabela SLR da gramatica do Analisador Sintatico do Mini Pascal.
                      
@@ -65,706 +65,1000 @@ public class TabelaSLR {
         return novoEstado;
     }
    
+    private void preencherNaoTerminais() {
+        // Estado 0
+        entradasNaoTerminais.get(0).putIfAbsent("P", 1);
+
+        // Estado 4
+        entradasNaoTerminais.get(4).putIfAbsent("B", 5);
+        entradasNaoTerminais.get(4).putIfAbsent("VAR_LIST", 6);
+        
+        // Estado 6
+        entradasNaoTerminais.get(6).putIfAbsent("PROC_LIST", 9);
+        entradasNaoTerminais.get(6).putIfAbsent("PROC", 10);
+        
+        // Estado 7
+        entradasNaoTerminais.get(7).putIfAbsent("VAR_DECL_LIST", 13);
+        entradasNaoTerminais.get(7).putIfAbsent("VAR_DECL", 14);
+        entradasNaoTerminais.get(7).putIfAbsent("ID_LIST", 15);
+        
+        // Estado 9
+        entradasNaoTerminais.get(9).putIfAbsent("C_SEC", 16);
+        
+        // Estado 10
+        entradasNaoTerminais.get(10).putIfAbsent("PROC_LIST", 18);
+        entradasNaoTerminais.get(10).putIfAbsent("PROC", 10);
+        
+        // Estado 17
+        entradasNaoTerminais.get(17).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(17).putIfAbsent("C_LIST", 24);
+        entradasNaoTerminais.get(17).putIfAbsent("C", 25);
+        entradasNaoTerminais.get(17).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(17).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(17).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(17).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(17).putIfAbsent("W", 30);
+        
+        // Estado 19
+        entradasNaoTerminais.get(19).putIfAbsent("PA_LIST", 36);
+        
+        // Estado 20
+        entradasNaoTerminais.get(20).putIfAbsent("ID_LIST", 38);
+        
+        // Estado 21
+        entradasNaoTerminais.get(21).putIfAbsent("VAR_DECL_LIST", 39);
+        entradasNaoTerminais.get(21).putIfAbsent("VAR_DECL", 14);
+        entradasNaoTerminais.get(21).putIfAbsent("ID_LIST", 15);
+        
+        // Estado 32
+        entradasNaoTerminais.get(32).putIfAbsent("PROC_ARGS", 45);
+        
+        // Estado 33
+        entradasNaoTerminais.get(33).putIfAbsent("E", 46);
+        entradasNaoTerminais.get(33).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(33).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 34
+        entradasNaoTerminais.get(34).putIfAbsent("VAR_ATR", 51);
+        
+        // Estado 35
+        entradasNaoTerminais.get(35).putIfAbsent("E", 52);
+        entradasNaoTerminais.get(35).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(35).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 37
+        entradasNaoTerminais.get(37).putIfAbsent("PA_DECL_LIST", 55);
+        entradasNaoTerminais.get(37).putIfAbsent("PA_DECL", 56);
+        entradasNaoTerminais.get(37).putIfAbsent("VAR_OPT", 57);
+        
+        // Estado 42
+        entradasNaoTerminais.get(42).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(42).putIfAbsent("C_LIST", 58);
+        entradasNaoTerminais.get(42).putIfAbsent("C", 25);
+        entradasNaoTerminais.get(42).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(42).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(42).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(42).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(42).putIfAbsent("W", 30);
+        
+        // Estado 43
+        entradasNaoTerminais.get(43).putIfAbsent("EXPR", 59);
+        entradasNaoTerminais.get(43).putIfAbsent("LOG_TERM", 61);
+        entradasNaoTerminais.get(43).putIfAbsent("E", 60);
+        entradasNaoTerminais.get(43).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(43).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 44
+        entradasNaoTerminais.get(44).putIfAbsent("E_LIST", 63);
+        entradasNaoTerminais.get(44).putIfAbsent("EXPR", 62);
+        entradasNaoTerminais.get(44).putIfAbsent("LOG_TERM", 61);
+        entradasNaoTerminais.get(44).putIfAbsent("E", 60);
+        entradasNaoTerminais.get(44).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(44).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 47
+        entradasNaoTerminais.get(47).putIfAbsent("REL_OP", 65);
+        
+        // Estado 48
+        entradasNaoTerminais.get(48).putIfAbsent("SI_E_TAIL", 75);
+        entradasNaoTerminais.get(48).putIfAbsent("TERM", 76);
+        entradasNaoTerminais.get(48).putIfAbsent("F", 74);
+        
+        // Estado 53
+        entradasNaoTerminais.get(53).putIfAbsent("B", 81);
+        entradasNaoTerminais.get(53).putIfAbsent("VAR_LIST", 6);
+        
+        // Estado 57
+        entradasNaoTerminais.get(57).putIfAbsent("ID_LIST", 84);
+        
+        // Estado 59
+        entradasNaoTerminais.get(59).putIfAbsent("LOG_OP_OR_XOR", 85);
+        
+        // Estado 62
+        entradasNaoTerminais.get(62).putIfAbsent("LOG_OP_OR_XOR", 85);
+        
+        // Estado 64
+        entradasNaoTerminais.get(64).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(64).putIfAbsent("C", 91);
+        entradasNaoTerminais.get(64).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(64).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(64).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(64).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(64).putIfAbsent("W", 30);
+        
+        // Estado 65
+        entradasNaoTerminais.get(65).putIfAbsent("SI_E", 92);
+        entradasNaoTerminais.get(65).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 72
+        entradasNaoTerminais.get(72).putIfAbsent("EXPR", 93);
+        entradasNaoTerminais.get(72).putIfAbsent("LOG_TERM", 61);
+        entradasNaoTerminais.get(72).putIfAbsent("E", 60);
+        entradasNaoTerminais.get(72).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(72).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 75
+        entradasNaoTerminais.get(75).putIfAbsent("ADD_OP", 94);
+        
+        // Estado 76
+        entradasNaoTerminais.get(76).putIfAbsent("MULT_OP", 97);
+        
+        // Estado 78
+        entradasNaoTerminais.get(78).putIfAbsent("F", 101);
+        
+        // Estado 79
+        entradasNaoTerminais.get(79).putIfAbsent("F", 102);
+        
+        // Estado 80
+        entradasNaoTerminais.get(80).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(80).putIfAbsent("C", 103);
+        entradasNaoTerminais.get(80).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(80).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(80).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(80).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(80).putIfAbsent("W", 30);
+        
+        // Estado 83
+        entradasNaoTerminais.get(83).putIfAbsent("PA_DECL_LIST", 105);
+        entradasNaoTerminais.get(83).putIfAbsent("PA_DECL", 56);
+        entradasNaoTerminais.get(83).putIfAbsent("VAR_OPT", 57);
+        
+        // Estado 85
+        entradasNaoTerminais.get(85).putIfAbsent("LOG_TERM", 107);
+        entradasNaoTerminais.get(85).putIfAbsent("E", 60);
+        entradasNaoTerminais.get(85).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(85).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 88
+        entradasNaoTerminais.get(88).putIfAbsent("E", 108);
+        entradasNaoTerminais.get(88).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(88).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 89
+        entradasNaoTerminais.get(89).putIfAbsent("E_LIST", 109);
+        entradasNaoTerminais.get(89).putIfAbsent("EXPR", 62);
+        entradasNaoTerminais.get(89).putIfAbsent("LOG_TERM", 61);
+        entradasNaoTerminais.get(89).putIfAbsent("E", 60);
+        entradasNaoTerminais.get(89).putIfAbsent("SI_E", 47);
+        entradasNaoTerminais.get(89).putIfAbsent("SIGN_OPT", 48);
+        
+        // Estado 91
+        entradasNaoTerminais.get(91).putIfAbsent("ELSE_OPT", 110);
+        
+        // Estado 93
+        entradasNaoTerminais.get(93).putIfAbsent("LOG_OP_OR_XOR", 85);
+        
+        // Estado 94
+        entradasNaoTerminais.get(94).putIfAbsent("TERM", 113);
+        entradasNaoTerminais.get(94).putIfAbsent("F", 74);
+        
+        // Estado 97
+        entradasNaoTerminais.get(97).putIfAbsent("F", 114);
+        
+        // Estado 111
+        entradasNaoTerminais.get(111).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(111).putIfAbsent("C", 117);
+        entradasNaoTerminais.get(111).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(111).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(111).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(111).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(111).putIfAbsent("W", 30);
+        
+        // Estado 113
+        entradasNaoTerminais.get(113).putIfAbsent("MULT_OP", 97);
+        
+        // Estado 115
+        entradasNaoTerminais.get(115).putIfAbsent("C_SEC", 23);
+        entradasNaoTerminais.get(115).putIfAbsent("C", 118);
+        entradasNaoTerminais.get(115).putIfAbsent("VAR_ATR", 26);
+        entradasNaoTerminais.get(115).putIfAbsent("PROC_CA", 27);
+        entradasNaoTerminais.get(115).putIfAbsent("I", 28);
+        entradasNaoTerminais.get(115).putIfAbsent("FOR", 29);
+        entradasNaoTerminais.get(115).putIfAbsent("W", 30);
+    }
+
     private void preencherTerminais() {
         // Estado 0
         entradasTerminais.get(0).putIfAbsent("program", "e2");
-
+        
         // Estado 1
         entradasTerminais.get(1).putIfAbsent("$", "OK");
-
+        
         // Estado 2
         entradasTerminais.get(2).putIfAbsent("ident", "e3");
-
+        
         // Estado 3
         entradasTerminais.get(3).putIfAbsent(";", "e4");
-
+        
         // Estado 4
-        entradasTerminais.get(4).putIfAbsent("begin", "r4");
-        entradasTerminais.get(4).putIfAbsent("procedure", "r4");
         entradasTerminais.get(4).putIfAbsent("var", "e7");
-
+        entradasTerminais.get(4).putIfAbsent("procedure", "r4");
+        entradasTerminais.get(4).putIfAbsent("begin", "r4");
+        
         // Estado 5
         entradasTerminais.get(5).putIfAbsent(".", "e8");
-
+        
         // Estado 6
-        entradasTerminais.get(6).putIfAbsent("begin", "r11");
         entradasTerminais.get(6).putIfAbsent("procedure", "e11");
-
+        entradasTerminais.get(6).putIfAbsent("begin", "r11");
+        
         // Estado 7
-        entradasTerminais.get(7).putIfAbsent("ident", "e15");
-
+        entradasTerminais.get(7).putIfAbsent("ident", "e12");
+        
         // Estado 8
         entradasTerminais.get(8).putIfAbsent("$", "r1");
-
+        
         // Estado 9
         entradasTerminais.get(9).putIfAbsent("begin", "e17");
-
+        
         // Estado 10
-        entradasTerminais.get(10).putIfAbsent("begin", "r11");
         entradasTerminais.get(10).putIfAbsent("procedure", "e11");
-
+        entradasTerminais.get(10).putIfAbsent("begin", "r11");
+        
         // Estado 11
         entradasTerminais.get(11).putIfAbsent("ident", "e19");
-
+        
         // Estado 12
-        entradasTerminais.get(12).putIfAbsent("begin", "r3");
-        entradasTerminais.get(12).putIfAbsent("procedure", "r3");
-
+        entradasTerminais.get(12).putIfAbsent(":", "r9");
+        entradasTerminais.get(12).putIfAbsent(",", "e20");
+        
         // Estado 13
-        entradasTerminais.get(13).putIfAbsent(";", "e20");
-
+        entradasTerminais.get(13).putIfAbsent("procedure", "r3");
+        entradasTerminais.get(13).putIfAbsent("begin", "r3");
+        
         // Estado 14
-        entradasTerminais.get(14).putIfAbsent(":", "e21");
-
-        // Estado 15 (Inclui a transição para vírgula e redução por FOLLOW)
-        entradasTerminais.get(15).putIfAbsent(",", "e22");
-        entradasTerminais.get(15).putIfAbsent(":", "r9");
-
+        entradasTerminais.get(14).putIfAbsent(";", "e21");
+        
+        // Estado 15
+        entradasTerminais.get(15).putIfAbsent(":", "e22");
+        
         // Estado 16
+        entradasTerminais.get(16).putIfAbsent(";", "r2");
         entradasTerminais.get(16).putIfAbsent(".", "r2");
-
+        
         // Estado 17
         entradasTerminais.get(17).putIfAbsent("begin", "e17");
         entradasTerminais.get(17).putIfAbsent("end", "r22");
-        entradasTerminais.get(17).putIfAbsent("for", "e34");
-        entradasTerminais.get(17).putIfAbsent("if", "e33");
-        entradasTerminais.get(17).putIfAbsent("proc", "e32");
         entradasTerminais.get(17).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(17).putIfAbsent("proc", "e32");
+        entradasTerminais.get(17).putIfAbsent("if", "e33");
+        entradasTerminais.get(17).putIfAbsent("for", "e34");
         entradasTerminais.get(17).putIfAbsent("while", "e35");
-
+        
         // Estado 18
         entradasTerminais.get(18).putIfAbsent("begin", "r10");
-        entradasTerminais.get(18).putIfAbsent("procedure", "r10");
-
+        
         // Estado 19
-        entradasTerminais.get(19).putIfAbsent("(", "e37");
         entradasTerminais.get(19).putIfAbsent(";", "r14");
-
+        entradasTerminais.get(19).putIfAbsent("(", "e37");
+        
         // Estado 20
-        entradasTerminais.get(20).putIfAbsent("ident", "e15");
-        entradasTerminais.get(20).putIfAbsent("begin", "r6");
-        entradasTerminais.get(20).putIfAbsent("procedure", "r6");
-
+        entradasTerminais.get(20).putIfAbsent("ident", "e12");
+        
         // Estado 21
-        entradasTerminais.get(21).putIfAbsent("tipo", "e39");
-
+        entradasTerminais.get(21).putIfAbsent("ident", "e12");
+        entradasTerminais.get(21).putIfAbsent("procedure", "r6");
+        entradasTerminais.get(21).putIfAbsent("begin", "r6");
+        
         // Estado 22
-        entradasTerminais.get(22).putIfAbsent("ident", "e15");
-
+        entradasTerminais.get(22).putIfAbsent("tipo", "e40");
+        
         // Estado 23
-        entradasTerminais.get(23).putIfAbsent("end", "e41");
-
+        entradasTerminais.get(23).putIfAbsent(";", "r28");
+        entradasTerminais.get(23).putIfAbsent("else", "r28");
+        
         // Estado 24
-        entradasTerminais.get(24).putIfAbsent(";", "e42");
-
-        // Estados de Redução de Comandos (25 a 30)
-        entradasTerminais.get(25).putIfAbsent(";", "r23");
-        entradasTerminais.get(25).putIfAbsent("end", "r23");
-        entradasTerminais.get(26).putIfAbsent(";", "r24");
-        entradasTerminais.get(26).putIfAbsent("end", "r24");
-        entradasTerminais.get(27).putIfAbsent(";", "r25");
-        entradasTerminais.get(27).putIfAbsent("end", "r25");
-        entradasTerminais.get(28).putIfAbsent(";", "r26");
-        entradasTerminais.get(28).putIfAbsent("end", "r26");
-        entradasTerminais.get(29).putIfAbsent(";", "r27");
-        entradasTerminais.get(29).putIfAbsent("end", "r27");
-        entradasTerminais.get(30).putIfAbsent(";", "r28");
-        entradasTerminais.get(30).putIfAbsent("end", "r28");
-
+        entradasTerminais.get(24).putIfAbsent("end", "e41");
+        
+        // Estado 25
+        entradasTerminais.get(25).putIfAbsent(";", "e42");
+        
+        // Estado 26
+        entradasTerminais.get(26).putIfAbsent(";", "r23");
+        entradasTerminais.get(26).putIfAbsent("else", "r23");
+        
+        // Estado 27
+        entradasTerminais.get(27).putIfAbsent(";", "r24");
+        entradasTerminais.get(27).putIfAbsent("else", "r24");
+        
+        // Estado 28
+        entradasTerminais.get(28).putIfAbsent(";", "r25");
+        entradasTerminais.get(28).putIfAbsent("else", "r25");
+        
+        // Estado 29
+        entradasTerminais.get(29).putIfAbsent(";", "r26");
+        entradasTerminais.get(29).putIfAbsent("else", "r26");
+        
+        // Estado 30
+        entradasTerminais.get(30).putIfAbsent(";", "r27");
+        entradasTerminais.get(30).putIfAbsent("else", "r27");
+        
         // Estado 31
         entradasTerminais.get(31).putIfAbsent(":=", "e43");
-
+        
         // Estado 32
-        entradasTerminais.get(32).putIfAbsent("(", "e45");
         entradasTerminais.get(32).putIfAbsent(";", "r32");
-        entradasTerminais.get(32).putIfAbsent("end", "r32");
-
+        entradasTerminais.get(32).putIfAbsent("(", "e44");
+        entradasTerminais.get(32).putIfAbsent("else", "r32");
+        
         // Estado 33
+        entradasTerminais.get(33).putIfAbsent("(", "r57");
+        entradasTerminais.get(33).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(33).putIfAbsent("numero", "r57");
+        entradasTerminais.get(33).putIfAbsent("not", "r57");
         entradasTerminais.get(33).putIfAbsent("+", "e49");
         entradasTerminais.get(33).putIfAbsent("-", "e50");
-        entradasTerminais.get(33).putIfAbsent("(", "r57");
-        entradasTerminais.get(33).putIfAbsent("numero", "r57");
-        entradasTerminais.get(33).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(33).putIfAbsent("not", "r57");
-
+        
         // Estado 34
         entradasTerminais.get(34).putIfAbsent("variavel", "e31");
-
+        
         // Estado 35
+        entradasTerminais.get(35).putIfAbsent("(", "r57");
+        entradasTerminais.get(35).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(35).putIfAbsent("numero", "r57");
+        entradasTerminais.get(35).putIfAbsent("not", "r57");
         entradasTerminais.get(35).putIfAbsent("+", "e49");
         entradasTerminais.get(35).putIfAbsent("-", "e50");
-        entradasTerminais.get(35).putIfAbsent("(", "r57");
-        entradasTerminais.get(35).putIfAbsent("numero", "r57");
-        entradasTerminais.get(35).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(35).putIfAbsent("not", "r57");
-
+        
         // Estado 36
         entradasTerminais.get(36).putIfAbsent(";", "e53");
-
+        
         // Estado 37
-        entradasTerminais.get(37).putIfAbsent("var", "e57");
         entradasTerminais.get(37).putIfAbsent("ident", "r19");
-
+        entradasTerminais.get(37).putIfAbsent("var", "e54");
+        
         // Estado 38
-        entradasTerminais.get(38).putIfAbsent("begin", "r5");
-        entradasTerminais.get(38).putIfAbsent("procedure", "r5");
-
+        entradasTerminais.get(38).putIfAbsent(":", "r8");
+        
         // Estado 39
-        entradasTerminais.get(39).putIfAbsent(";", "r7");
-        entradasTerminais.get(39).putIfAbsent("end", "r7");
-
+        entradasTerminais.get(39).putIfAbsent("procedure", "r5");
+        entradasTerminais.get(39).putIfAbsent("begin", "r5");
+        
         // Estado 40
-        entradasTerminais.get(40).putIfAbsent(":", "r8");
-        entradasTerminais.get(40).putIfAbsent(";", "r8");
-
+        entradasTerminais.get(40).putIfAbsent(";", "r7");
+        
         // Estado 41
         entradasTerminais.get(41).putIfAbsent(";", "r20");
         entradasTerminais.get(41).putIfAbsent(".", "r20");
-
+        entradasTerminais.get(41).putIfAbsent("else", "r20");
+        
         // Estado 42
         entradasTerminais.get(42).putIfAbsent("begin", "e17");
         entradasTerminais.get(42).putIfAbsent("end", "r22");
-        entradasTerminais.get(42).putIfAbsent("for", "e34");
-        entradasTerminais.get(42).putIfAbsent("if", "e33");
-        entradasTerminais.get(42).putIfAbsent("proc", "e32");
         entradasTerminais.get(42).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(42).putIfAbsent("proc", "e32");
+        entradasTerminais.get(42).putIfAbsent("if", "e33");
+        entradasTerminais.get(42).putIfAbsent("for", "e34");
         entradasTerminais.get(42).putIfAbsent("while", "e35");
-
+        
         // Estado 43
+        entradasTerminais.get(43).putIfAbsent("(", "r57");
+        entradasTerminais.get(43).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(43).putIfAbsent("numero", "r57");
+        entradasTerminais.get(43).putIfAbsent("not", "r57");
         entradasTerminais.get(43).putIfAbsent("+", "e49");
         entradasTerminais.get(43).putIfAbsent("-", "e50");
-        entradasTerminais.get(43).putIfAbsent("(", "r57");
-        entradasTerminais.get(43).putIfAbsent("numero", "r57");
-        entradasTerminais.get(43).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(43).putIfAbsent("not", "r57");
-
+        
         // Estado 44
-        entradasTerminais.get(44).putIfAbsent(";", "r30");
-        entradasTerminais.get(44).putIfAbsent("end", "r30");
-
+        entradasTerminais.get(44).putIfAbsent("(", "r57");
+        entradasTerminais.get(44).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(44).putIfAbsent("numero", "r57");
+        entradasTerminais.get(44).putIfAbsent("not", "r57");
+        entradasTerminais.get(44).putIfAbsent("+", "e49");
+        entradasTerminais.get(44).putIfAbsent("-", "e50");
+        
         // Estado 45
-        entradasTerminais.get(45).putIfAbsent("+", "e49");
-        entradasTerminais.get(45).putIfAbsent("-", "e50");
-        entradasTerminais.get(45).putIfAbsent("(", "r57");
-        entradasTerminais.get(45).putIfAbsent("numero", "r57");
-        entradasTerminais.get(45).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(45).putIfAbsent("not", "r57");
-
+        entradasTerminais.get(45).putIfAbsent(";", "r30");
+        entradasTerminais.get(45).putIfAbsent("else", "r30");
+        
         // Estado 46
         entradasTerminais.get(46).putIfAbsent("then", "e64");
-
+        
         // Estado 47
+        entradasTerminais.get(47).putIfAbsent(";", "r45");
+        entradasTerminais.get(47).putIfAbsent(",", "r45");
+        entradasTerminais.get(47).putIfAbsent(")", "r45");
+        entradasTerminais.get(47).putIfAbsent("then", "r45");
+        entradasTerminais.get(47).putIfAbsent("else", "r45");
+        entradasTerminais.get(47).putIfAbsent("to", "r45");
+        entradasTerminais.get(47).putIfAbsent("do", "r45");
+        entradasTerminais.get(47).putIfAbsent("and", "r45");
         entradasTerminais.get(47).putIfAbsent("=", "e66");
         entradasTerminais.get(47).putIfAbsent("<", "e67");
         entradasTerminais.get(47).putIfAbsent(">", "e68");
         entradasTerminais.get(47).putIfAbsent("<=", "e69");
         entradasTerminais.get(47).putIfAbsent(">=", "e70");
         entradasTerminais.get(47).putIfAbsent("<>", "e71");
-        entradasTerminais.get(47).putIfAbsent(";", "r45");
-        entradasTerminais.get(47).putIfAbsent(",", "r45");
-        entradasTerminais.get(47).putIfAbsent(")", "r45");
-        entradasTerminais.get(47).putIfAbsent("then", "r45");
-        entradasTerminais.get(47).putIfAbsent("to", "r45");
-        entradasTerminais.get(47).putIfAbsent("do", "r45");
-        entradasTerminais.get(47).putIfAbsent("and", "r45");
         entradasTerminais.get(47).putIfAbsent("or", "r45");
         entradasTerminais.get(47).putIfAbsent("xor", "r45");
-
+        
         // Estado 48
-        entradasTerminais.get(48).putIfAbsent("(", "e77");
-        entradasTerminais.get(48).putIfAbsent("numero", "e75");
-        entradasTerminais.get(48).putIfAbsent("variavel", "e76");
+        entradasTerminais.get(48).putIfAbsent("(", "e72");
+        entradasTerminais.get(48).putIfAbsent("variavel", "e73");
+        entradasTerminais.get(48).putIfAbsent("numero", "e77");
         entradasTerminais.get(48).putIfAbsent("not", "e78");
-
-        // Estado 49 e 50
+        
+        // Estado 49
         entradasTerminais.get(49).putIfAbsent("(", "r55");
-        entradasTerminais.get(49).putIfAbsent("numero", "r55");
         entradasTerminais.get(49).putIfAbsent("variavel", "r55");
+        entradasTerminais.get(49).putIfAbsent("numero", "r55");
         entradasTerminais.get(49).putIfAbsent("not", "r55");
+        
+        // Estado 50
         entradasTerminais.get(50).putIfAbsent("(", "r56");
-        entradasTerminais.get(50).putIfAbsent("numero", "r56");
         entradasTerminais.get(50).putIfAbsent("variavel", "r56");
+        entradasTerminais.get(50).putIfAbsent("numero", "r56");
         entradasTerminais.get(50).putIfAbsent("not", "r56");
-
+        
         // Estado 51
         entradasTerminais.get(51).putIfAbsent("to", "e79");
-
+        
         // Estado 52
         entradasTerminais.get(52).putIfAbsent("do", "e80");
-
+        
         // Estado 53
-        entradasTerminais.get(53).putIfAbsent("begin", "r4");
-        entradasTerminais.get(53).putIfAbsent("procedure", "r4");
         entradasTerminais.get(53).putIfAbsent("var", "e7");
-
+        entradasTerminais.get(53).putIfAbsent("procedure", "r4");
+        entradasTerminais.get(53).putIfAbsent("begin", "r4");
+        
         // Estado 54
-        entradasTerminais.get(54).putIfAbsent(")", "e82");
-
+        entradasTerminais.get(54).putIfAbsent("ident", "r18");
+        
         // Estado 55
-        entradasTerminais.get(55).putIfAbsent(";", "e83");
-        entradasTerminais.get(55).putIfAbsent(")", "r16");
-
+        entradasTerminais.get(55).putIfAbsent(")", "e82");
+        
         // Estado 56
-        entradasTerminais.get(56).putIfAbsent("ident", "e15");
-
+        entradasTerminais.get(56).putIfAbsent(";", "e83");
+        entradasTerminais.get(56).putIfAbsent(")", "r16");
+        
         // Estado 57
-        entradasTerminais.get(57).putIfAbsent("ident", "r18");
-
+        entradasTerminais.get(57).putIfAbsent("ident", "e12");
+        
         // Estado 58
         entradasTerminais.get(58).putIfAbsent("end", "r21");
-
+        
         // Estado 59
         entradasTerminais.get(59).putIfAbsent(";", "r29");
-        entradasTerminais.get(59).putIfAbsent("end", "r29");
+        entradasTerminais.get(59).putIfAbsent("else", "r29");
+        entradasTerminais.get(59).putIfAbsent("to", "r29");
         entradasTerminais.get(59).putIfAbsent("or", "e86");
         entradasTerminais.get(59).putIfAbsent("xor", "e87");
-
+        
         // Estado 60
-        entradasTerminais.get(60).putIfAbsent(";", "r41");
-        entradasTerminais.get(60).putIfAbsent(",", "r41");
-        entradasTerminais.get(60).putIfAbsent(")", "r41");
-        entradasTerminais.get(60).putIfAbsent("then", "r41");
-        entradasTerminais.get(60).putIfAbsent("to", "r41");
-        entradasTerminais.get(60).putIfAbsent("do", "r41");
-        entradasTerminais.get(60).putIfAbsent("end", "r41");
-        entradasTerminais.get(60).putIfAbsent("and", "e88");
-        entradasTerminais.get(60).putIfAbsent("or", "r41");
-        entradasTerminais.get(60).putIfAbsent("xor", "r41");
-
+        entradasTerminais.get(60).putIfAbsent(";", "r43");
+        entradasTerminais.get(60).putIfAbsent(",", "r43");
+        entradasTerminais.get(60).putIfAbsent(")", "r43");
+        entradasTerminais.get(60).putIfAbsent("else", "r43");
+        entradasTerminais.get(60).putIfAbsent("to", "r43");
+        entradasTerminais.get(60).putIfAbsent("and", "r43");
+        entradasTerminais.get(60).putIfAbsent("or", "r43");
+        entradasTerminais.get(60).putIfAbsent("xor", "r43");
+        
         // Estado 61
-        entradasTerminais.get(61).putIfAbsent(";", "r43");
-        entradasTerminais.get(61).putIfAbsent(",", "r43");
-        entradasTerminais.get(61).putIfAbsent(")", "r43");
-        entradasTerminais.get(61).putIfAbsent("then", "r43");
-        entradasTerminais.get(61).putIfAbsent("to", "r43");
-        entradasTerminais.get(61).putIfAbsent("do", "r43");
-        entradasTerminais.get(61).putIfAbsent("end", "r43");
-        entradasTerminais.get(61).putIfAbsent("and", "r43");
-        entradasTerminais.get(61).putIfAbsent("or", "r43");
-        entradasTerminais.get(61).putIfAbsent("xor", "r43");
-
+        entradasTerminais.get(61).putIfAbsent(";", "r41");
+        entradasTerminais.get(61).putIfAbsent(",", "r41");
+        entradasTerminais.get(61).putIfAbsent(")", "r41");
+        entradasTerminais.get(61).putIfAbsent("else", "r41");
+        entradasTerminais.get(61).putIfAbsent("to", "r41");
+        entradasTerminais.get(61).putIfAbsent("and", "e88");
+        entradasTerminais.get(61).putIfAbsent("or", "r41");
+        entradasTerminais.get(61).putIfAbsent("xor", "r41");
+        
         // Estado 62
-        entradasTerminais.get(62).putIfAbsent(")", "e89");
-
+        entradasTerminais.get(62).putIfAbsent(",", "e89");
+        entradasTerminais.get(62).putIfAbsent(")", "r34");
+        entradasTerminais.get(62).putIfAbsent("or", "e86");
+        entradasTerminais.get(62).putIfAbsent("xor", "e87");
+        
         // Estado 63
-        entradasTerminais.get(63).putIfAbsent(",", "e90");
-        entradasTerminais.get(63).putIfAbsent(")", "r34");
-        entradasTerminais.get(63).putIfAbsent("or", "e86");
-        entradasTerminais.get(63).putIfAbsent("xor", "e87");
-
+        entradasTerminais.get(63).putIfAbsent(")", "e90");
+        
         // Estado 64
         entradasTerminais.get(64).putIfAbsent("begin", "e17");
-        entradasTerminais.get(64).putIfAbsent("for", "e34");
-        entradasTerminais.get(64).putIfAbsent("if", "e33");
-        entradasTerminais.get(64).putIfAbsent("proc", "e32");
         entradasTerminais.get(64).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(64).putIfAbsent("proc", "e32");
+        entradasTerminais.get(64).putIfAbsent("if", "e33");
+        entradasTerminais.get(64).putIfAbsent("for", "e34");
         entradasTerminais.get(64).putIfAbsent("while", "e35");
-
+        
         // Estado 65
+        entradasTerminais.get(65).putIfAbsent("(", "r57");
+        entradasTerminais.get(65).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(65).putIfAbsent("numero", "r57");
+        entradasTerminais.get(65).putIfAbsent("not", "r57");
         entradasTerminais.get(65).putIfAbsent("+", "e49");
         entradasTerminais.get(65).putIfAbsent("-", "e50");
-        entradasTerminais.get(65).putIfAbsent("(", "r57");
-        entradasTerminais.get(65).putIfAbsent("numero", "r57");
-        entradasTerminais.get(65).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(65).putIfAbsent("not", "r57");
-
-        // Estados Relacionais (66 a 71)
+        
+        // Estado 66
         entradasTerminais.get(66).putIfAbsent("(", "r63");
-        entradasTerminais.get(66).putIfAbsent("numero", "r63");
         entradasTerminais.get(66).putIfAbsent("variavel", "r63");
+        entradasTerminais.get(66).putIfAbsent("numero", "r63");
         entradasTerminais.get(66).putIfAbsent("not", "r63");
+        entradasTerminais.get(66).putIfAbsent("+", "r63");
+        entradasTerminais.get(66).putIfAbsent("-", "r63");
+        
+        // Estado 67
         entradasTerminais.get(67).putIfAbsent("(", "r64");
-        entradasTerminais.get(67).putIfAbsent("numero", "r64");
         entradasTerminais.get(67).putIfAbsent("variavel", "r64");
+        entradasTerminais.get(67).putIfAbsent("numero", "r64");
         entradasTerminais.get(67).putIfAbsent("not", "r64");
+        entradasTerminais.get(67).putIfAbsent("+", "r64");
+        entradasTerminais.get(67).putIfAbsent("-", "r64");
+        
+        // Estado 68
         entradasTerminais.get(68).putIfAbsent("(", "r65");
-        entradasTerminais.get(68).putIfAbsent("numero", "r65");
         entradasTerminais.get(68).putIfAbsent("variavel", "r65");
+        entradasTerminais.get(68).putIfAbsent("numero", "r65");
         entradasTerminais.get(68).putIfAbsent("not", "r65");
+        entradasTerminais.get(68).putIfAbsent("+", "r65");
+        entradasTerminais.get(68).putIfAbsent("-", "r65");
+        
+        // Estado 69
         entradasTerminais.get(69).putIfAbsent("(", "r66");
-        entradasTerminais.get(69).putIfAbsent("numero", "r66");
         entradasTerminais.get(69).putIfAbsent("variavel", "r66");
+        entradasTerminais.get(69).putIfAbsent("numero", "r66");
         entradasTerminais.get(69).putIfAbsent("not", "r66");
+        entradasTerminais.get(69).putIfAbsent("+", "r66");
+        entradasTerminais.get(69).putIfAbsent("-", "r66");
+        
+        // Estado 70
         entradasTerminais.get(70).putIfAbsent("(", "r67");
-        entradasTerminais.get(70).putIfAbsent("numero", "r67");
         entradasTerminais.get(70).putIfAbsent("variavel", "r67");
+        entradasTerminais.get(70).putIfAbsent("numero", "r67");
         entradasTerminais.get(70).putIfAbsent("not", "r67");
+        entradasTerminais.get(70).putIfAbsent("+", "r67");
+        entradasTerminais.get(70).putIfAbsent("-", "r67");
+        
+        // Estado 71
         entradasTerminais.get(71).putIfAbsent("(", "r68");
-        entradasTerminais.get(71).putIfAbsent("numero", "r68");
         entradasTerminais.get(71).putIfAbsent("variavel", "r68");
+        entradasTerminais.get(71).putIfAbsent("numero", "r68");
         entradasTerminais.get(71).putIfAbsent("not", "r68");
-
+        entradasTerminais.get(71).putIfAbsent("+", "r68");
+        entradasTerminais.get(71).putIfAbsent("-", "r68");
+        
         // Estado 72
-        entradasTerminais.get(72).putIfAbsent("+", "e94");
-        entradasTerminais.get(72).putIfAbsent("-", "e95");
-        entradasTerminais.get(72).putIfAbsent(";", "r46");
-        entradasTerminais.get(72).putIfAbsent(",", "r46");
-        entradasTerminais.get(72).putIfAbsent(")", "r46");
-        entradasTerminais.get(72).putIfAbsent("then", "r46");
-        entradasTerminais.get(72).putIfAbsent("to", "r46");
-        entradasTerminais.get(72).putIfAbsent("do", "r46");
-        entradasTerminais.get(72).putIfAbsent("end", "r46");
-        entradasTerminais.get(72).putIfAbsent("and", "r46");
-        entradasTerminais.get(72).putIfAbsent("or", "r46");
-        entradasTerminais.get(72).putIfAbsent("xor", "r46");
-        entradasTerminais.get(72).putIfAbsent("=", "r46");
-        entradasTerminais.get(72).putIfAbsent("<", "r46");
-        entradasTerminais.get(72).putIfAbsent(">", "r46");
-        entradasTerminais.get(72).putIfAbsent("<=", "r46");
-        entradasTerminais.get(72).putIfAbsent(">=", "r46");
-        entradasTerminais.get(72).putIfAbsent("<>", "r46");
-
+        entradasTerminais.get(72).putIfAbsent("(", "r57");
+        entradasTerminais.get(72).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(72).putIfAbsent("numero", "r57");
+        entradasTerminais.get(72).putIfAbsent("not", "r57");
+        entradasTerminais.get(72).putIfAbsent("+", "e49");
+        entradasTerminais.get(72).putIfAbsent("-", "e50");
+        
         // Estado 73
-        entradasTerminais.get(73).putIfAbsent("*", "e97");
-        entradasTerminais.get(73).putIfAbsent("/", "e98");
-        entradasTerminais.get(73).putIfAbsent("%", "e99");
-        entradasTerminais.get(73).putIfAbsent(";", "r48");
-        entradasTerminais.get(73).putIfAbsent(",", "r48");
-        entradasTerminais.get(73).putIfAbsent(")", "r48");
-        entradasTerminais.get(73).putIfAbsent("then", "r48");
-        entradasTerminais.get(73).putIfAbsent("to", "r48");
-        entradasTerminais.get(73).putIfAbsent("do", "r48");
-        entradasTerminais.get(73).putIfAbsent("end", "r48");
-        entradasTerminais.get(73).putIfAbsent("and", "r48");
-        entradasTerminais.get(73).putIfAbsent("or", "r48");
-        entradasTerminais.get(73).putIfAbsent("xor", "r48");
-        entradasTerminais.get(73).putIfAbsent("=", "r48");
-        entradasTerminais.get(73).putIfAbsent("<", "r48");
-        entradasTerminais.get(73).putIfAbsent(">", "r48");
-        entradasTerminais.get(73).putIfAbsent("<=", "r48");
-        entradasTerminais.get(73).putIfAbsent(">=", "r48");
-        entradasTerminais.get(73).putIfAbsent("<>", "r48");
-        entradasTerminais.get(73).putIfAbsent("+", "r48");
-        entradasTerminais.get(73).putIfAbsent("-", "r48");
-
-        // Estados 74 a 76 (Reduções de F e Term)
-        for (int s : new int[]{74, 75, 76}) {
-            entradasTerminais.get(s).putIfAbsent(";", "r50"); // ou r51/r52 dependendo do estado
-            entradasTerminais.get(s).putIfAbsent("end", "r50");
-            entradasTerminais.get(s).putIfAbsent(")", "r50");
-            entradasTerminais.get(s).putIfAbsent(",", "r50");
-            entradasTerminais.get(s).putIfAbsent("then", "r50");
-            entradasTerminais.get(s).putIfAbsent("to", "r50");
-            entradasTerminais.get(s).putIfAbsent("do", "r50");
-            entradasTerminais.get(s).putIfAbsent("and", "r50");
-            entradasTerminais.get(s).putIfAbsent("or", "r50");
-            entradasTerminais.get(s).putIfAbsent("xor", "r50");
-            entradasTerminais.get(s).putIfAbsent("+", "r50");
-            entradasTerminais.get(s).putIfAbsent("-", "r50");
-            entradasTerminais.get(s).putIfAbsent("*", "r50");
-            entradasTerminais.get(s).putIfAbsent("/", "r50");
-            entradasTerminais.get(s).putIfAbsent("%", "r50");
-            entradasTerminais.get(s).putIfAbsent("=", "r50");
-            entradasTerminais.get(s).putIfAbsent("<", "r50");
-            entradasTerminais.get(s).putIfAbsent(">", "r50");
-            entradasTerminais.get(s).putIfAbsent("<=", "r50");
-            entradasTerminais.get(s).putIfAbsent(">=", "r50");
-            entradasTerminais.get(s).putIfAbsent("<>", "r50");
-        }
-
+        entradasTerminais.get(73).putIfAbsent(";", "r52");
+        entradasTerminais.get(73).putIfAbsent(",", "r52");
+        entradasTerminais.get(73).putIfAbsent(")", "r52");
+        entradasTerminais.get(73).putIfAbsent("then", "r52");
+        entradasTerminais.get(73).putIfAbsent("else", "r52");
+        entradasTerminais.get(73).putIfAbsent("to", "r52");
+        entradasTerminais.get(73).putIfAbsent("do", "r52");
+        entradasTerminais.get(73).putIfAbsent("and", "r52");
+        entradasTerminais.get(73).putIfAbsent("+", "r52");
+        entradasTerminais.get(73).putIfAbsent("-", "r52");
+        entradasTerminais.get(73).putIfAbsent("*", "r52");
+        entradasTerminais.get(73).putIfAbsent("/", "r52");
+        entradasTerminais.get(73).putIfAbsent("%", "r52");
+        entradasTerminais.get(73).putIfAbsent("=", "r52");
+        entradasTerminais.get(73).putIfAbsent("<", "r52");
+        entradasTerminais.get(73).putIfAbsent(">", "r52");
+        entradasTerminais.get(73).putIfAbsent("<=", "r52");
+        entradasTerminais.get(73).putIfAbsent(">=", "r52");
+        entradasTerminais.get(73).putIfAbsent("<>", "r52");
+        entradasTerminais.get(73).putIfAbsent("or", "r52");
+        entradasTerminais.get(73).putIfAbsent("xor", "r52");
+        
+        // Estado 74
+        entradasTerminais.get(74).putIfAbsent(";", "r50");
+        entradasTerminais.get(74).putIfAbsent(",", "r50");
+        entradasTerminais.get(74).putIfAbsent(")", "r50");
+        entradasTerminais.get(74).putIfAbsent("then", "r50");
+        entradasTerminais.get(74).putIfAbsent("else", "r50");
+        entradasTerminais.get(74).putIfAbsent("to", "r50");
+        entradasTerminais.get(74).putIfAbsent("do", "r50");
+        entradasTerminais.get(74).putIfAbsent("and", "r50");
+        entradasTerminais.get(74).putIfAbsent("+", "r50");
+        entradasTerminais.get(74).putIfAbsent("-", "r50");
+        entradasTerminais.get(74).putIfAbsent("*", "r50");
+        entradasTerminais.get(74).putIfAbsent("/", "r50");
+        entradasTerminais.get(74).putIfAbsent("%", "r50");
+        entradasTerminais.get(74).putIfAbsent("=", "r50");
+        entradasTerminais.get(74).putIfAbsent("<", "r50");
+        entradasTerminais.get(74).putIfAbsent(">", "r50");
+        entradasTerminais.get(74).putIfAbsent("<=", "r50");
+        entradasTerminais.get(74).putIfAbsent(">=", "r50");
+        entradasTerminais.get(74).putIfAbsent("<>", "r50");
+        entradasTerminais.get(74).putIfAbsent("or", "r50");
+        entradasTerminais.get(74).putIfAbsent("xor", "r50");
+        
+        // Estado 75
+        entradasTerminais.get(75).putIfAbsent(";", "r46");
+        entradasTerminais.get(75).putIfAbsent(",", "r46");
+        entradasTerminais.get(75).putIfAbsent(")", "r46");
+        entradasTerminais.get(75).putIfAbsent("then", "r46");
+        entradasTerminais.get(75).putIfAbsent("else", "r46");
+        entradasTerminais.get(75).putIfAbsent("to", "r46");
+        entradasTerminais.get(75).putIfAbsent("do", "r46");
+        entradasTerminais.get(75).putIfAbsent("and", "r46");
+        entradasTerminais.get(75).putIfAbsent("+", "e95");
+        entradasTerminais.get(75).putIfAbsent("-", "e96");
+        entradasTerminais.get(75).putIfAbsent("=", "r46");
+        entradasTerminais.get(75).putIfAbsent("<", "r46");
+        entradasTerminais.get(75).putIfAbsent(">", "r46");
+        entradasTerminais.get(75).putIfAbsent("<=", "r46");
+        entradasTerminais.get(75).putIfAbsent(">=", "r46");
+        entradasTerminais.get(75).putIfAbsent("<>", "r46");
+        entradasTerminais.get(75).putIfAbsent("or", "r46");
+        entradasTerminais.get(75).putIfAbsent("xor", "r46");
+        
+        // Estado 76
+        entradasTerminais.get(76).putIfAbsent(";", "r48");
+        entradasTerminais.get(76).putIfAbsent(",", "r48");
+        entradasTerminais.get(76).putIfAbsent(")", "r48");
+        entradasTerminais.get(76).putIfAbsent("then", "r48");
+        entradasTerminais.get(76).putIfAbsent("else", "r48");
+        entradasTerminais.get(76).putIfAbsent("to", "r48");
+        entradasTerminais.get(76).putIfAbsent("do", "r48");
+        entradasTerminais.get(76).putIfAbsent("and", "r48");
+        entradasTerminais.get(76).putIfAbsent("+", "r48");
+        entradasTerminais.get(76).putIfAbsent("-", "r48");
+        entradasTerminais.get(76).putIfAbsent("*", "e98");
+        entradasTerminais.get(76).putIfAbsent("/", "e99");
+        entradasTerminais.get(76).putIfAbsent("%", "e100");
+        entradasTerminais.get(76).putIfAbsent("=", "r48");
+        entradasTerminais.get(76).putIfAbsent("<", "r48");
+        entradasTerminais.get(76).putIfAbsent(">", "r48");
+        entradasTerminais.get(76).putIfAbsent("<=", "r48");
+        entradasTerminais.get(76).putIfAbsent(">=", "r48");
+        entradasTerminais.get(76).putIfAbsent("<>", "r48");
+        entradasTerminais.get(76).putIfAbsent("or", "r48");
+        entradasTerminais.get(76).putIfAbsent("xor", "r48");
+        
         // Estado 77
-        entradasTerminais.get(77).putIfAbsent("(", "e77");
-        entradasTerminais.get(77).putIfAbsent("numero", "e75");
-        entradasTerminais.get(77).putIfAbsent("variavel", "e76");
-        entradasTerminais.get(77).putIfAbsent("not", "e78");
-
+        entradasTerminais.get(77).putIfAbsent(";", "r51");
+        entradasTerminais.get(77).putIfAbsent(",", "r51");
+        entradasTerminais.get(77).putIfAbsent(")", "r51");
+        entradasTerminais.get(77).putIfAbsent("then", "r51");
+        entradasTerminais.get(77).putIfAbsent("else", "r51");
+        entradasTerminais.get(77).putIfAbsent("to", "r51");
+        entradasTerminais.get(77).putIfAbsent("do", "r51");
+        entradasTerminais.get(77).putIfAbsent("and", "r51");
+        entradasTerminais.get(77).putIfAbsent("+", "r51");
+        entradasTerminais.get(77).putIfAbsent("-", "r51");
+        entradasTerminais.get(77).putIfAbsent("*", "r51");
+        entradasTerminais.get(77).putIfAbsent("/", "r51");
+        entradasTerminais.get(77).putIfAbsent("%", "r51");
+        entradasTerminais.get(77).putIfAbsent("=", "r51");
+        entradasTerminais.get(77).putIfAbsent("<", "r51");
+        entradasTerminais.get(77).putIfAbsent(">", "r51");
+        entradasTerminais.get(77).putIfAbsent("<=", "r51");
+        entradasTerminais.get(77).putIfAbsent(">=", "r51");
+        entradasTerminais.get(77).putIfAbsent("<>", "r51");
+        entradasTerminais.get(77).putIfAbsent("or", "r51");
+        entradasTerminais.get(77).putIfAbsent("xor", "r51");
+        
         // Estado 78
-        entradasTerminais.get(78).putIfAbsent("(", "e77");
-        entradasTerminais.get(78).putIfAbsent("numero", "e75");
-        entradasTerminais.get(78).putIfAbsent("variavel", "e76");
+        entradasTerminais.get(78).putIfAbsent("(", "e72");
+        entradasTerminais.get(78).putIfAbsent("variavel", "e73");
+        entradasTerminais.get(78).putIfAbsent("numero", "e77");
         entradasTerminais.get(78).putIfAbsent("not", "e78");
-
+        
         // Estado 79
-        entradasTerminais.get(79).putIfAbsent("(", "e77");
-        entradasTerminais.get(79).putIfAbsent("numero", "e75");
-        entradasTerminais.get(79).putIfAbsent("variavel", "e76");
+        entradasTerminais.get(79).putIfAbsent("(", "e72");
+        entradasTerminais.get(79).putIfAbsent("variavel", "e73");
+        entradasTerminais.get(79).putIfAbsent("numero", "e77");
         entradasTerminais.get(79).putIfAbsent("not", "e78");
-
+        
         // Estado 80
         entradasTerminais.get(80).putIfAbsent("begin", "e17");
-        entradasTerminais.get(80).putIfAbsent("for", "e34");
-        entradasTerminais.get(80).putIfAbsent("if", "e33");
-        entradasTerminais.get(80).putIfAbsent("proc", "e32");
         entradasTerminais.get(80).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(80).putIfAbsent("proc", "e32");
+        entradasTerminais.get(80).putIfAbsent("if", "e33");
+        entradasTerminais.get(80).putIfAbsent("for", "e34");
         entradasTerminais.get(80).putIfAbsent("while", "e35");
-
+        
         // Estado 81
         entradasTerminais.get(81).putIfAbsent(";", "e104");
-
+        
         // Estado 82
         entradasTerminais.get(82).putIfAbsent(";", "r13");
-        entradasTerminais.get(82).putIfAbsent("end", "r13");
-
+        
         // Estado 83
         entradasTerminais.get(83).putIfAbsent("ident", "r19");
-        entradasTerminais.get(83).putIfAbsent("var", "e57");
-
+        entradasTerminais.get(83).putIfAbsent("var", "e54");
+        
         // Estado 84
         entradasTerminais.get(84).putIfAbsent(":", "e106");
-
+        
         // Estado 85
+        entradasTerminais.get(85).putIfAbsent("(", "r57");
+        entradasTerminais.get(85).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(85).putIfAbsent("numero", "r57");
+        entradasTerminais.get(85).putIfAbsent("not", "r57");
         entradasTerminais.get(85).putIfAbsent("+", "e49");
         entradasTerminais.get(85).putIfAbsent("-", "e50");
-        entradasTerminais.get(85).putIfAbsent("(", "r57");
-        entradasTerminais.get(85).putIfAbsent("numero", "r57");
-        entradasTerminais.get(85).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(85).putIfAbsent("not", "r57");
-
-        // Estados 86 e 87
-        entradasTerminais.get(86).putIfAbsent(";", "r69");
-        entradasTerminais.get(86).putIfAbsent("end", "r69");
-        entradasTerminais.get(86).putIfAbsent(")", "r69");
-        entradasTerminais.get(86).putIfAbsent("then", "r69");
-        entradasTerminais.get(86).putIfAbsent("to", "r69");
-        entradasTerminais.get(86).putIfAbsent("do", "r69");
-        entradasTerminais.get(87).putIfAbsent(";", "r70");
-        entradasTerminais.get(87).putIfAbsent("end", "r70");
-        entradasTerminais.get(87).putIfAbsent(")", "r70");
-        entradasTerminais.get(87).putIfAbsent("then", "r70");
-        entradasTerminais.get(87).putIfAbsent("to", "r70");
-        entradasTerminais.get(87).putIfAbsent("do", "r70");
-
+        
+        // Estado 86
+        entradasTerminais.get(86).putIfAbsent("(", "r69");
+        entradasTerminais.get(86).putIfAbsent("variavel", "r69");
+        entradasTerminais.get(86).putIfAbsent("numero", "r69");
+        entradasTerminais.get(86).putIfAbsent("not", "r69");
+        entradasTerminais.get(86).putIfAbsent("+", "r69");
+        entradasTerminais.get(86).putIfAbsent("-", "r69");
+        
+        // Estado 87
+        entradasTerminais.get(87).putIfAbsent("(", "r70");
+        entradasTerminais.get(87).putIfAbsent("variavel", "r70");
+        entradasTerminais.get(87).putIfAbsent("numero", "r70");
+        entradasTerminais.get(87).putIfAbsent("not", "r70");
+        entradasTerminais.get(87).putIfAbsent("+", "r70");
+        entradasTerminais.get(87).putIfAbsent("-", "r70");
+        
         // Estado 88
+        entradasTerminais.get(88).putIfAbsent("(", "r57");
+        entradasTerminais.get(88).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(88).putIfAbsent("numero", "r57");
+        entradasTerminais.get(88).putIfAbsent("not", "r57");
         entradasTerminais.get(88).putIfAbsent("+", "e49");
         entradasTerminais.get(88).putIfAbsent("-", "e50");
-        entradasTerminais.get(88).putIfAbsent("(", "r57");
-        entradasTerminais.get(88).putIfAbsent("numero", "r57");
-        entradasTerminais.get(88).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(88).putIfAbsent("not", "r57");
-
+        
         // Estado 89
-        entradasTerminais.get(89).putIfAbsent(";", "r31");
-        entradasTerminais.get(89).putIfAbsent("end", "r31");
-
+        entradasTerminais.get(89).putIfAbsent("(", "r57");
+        entradasTerminais.get(89).putIfAbsent("variavel", "r57");
+        entradasTerminais.get(89).putIfAbsent("numero", "r57");
+        entradasTerminais.get(89).putIfAbsent("not", "r57");
+        entradasTerminais.get(89).putIfAbsent("+", "e49");
+        entradasTerminais.get(89).putIfAbsent("-", "e50");
+        
         // Estado 90
-        entradasTerminais.get(90).putIfAbsent("+", "e49");
-        entradasTerminais.get(90).putIfAbsent("-", "e50");
-        entradasTerminais.get(90).putIfAbsent("(", "r57");
-        entradasTerminais.get(90).putIfAbsent("numero", "r57");
-        entradasTerminais.get(90).putIfAbsent("variavel", "r57");
-        entradasTerminais.get(90).putIfAbsent("not", "r57");
-
+        entradasTerminais.get(90).putIfAbsent(";", "r31");
+        entradasTerminais.get(90).putIfAbsent("else", "r31");
+        
         // Estado 91
-        entradasTerminais.get(91).putIfAbsent("else", "e111");
         entradasTerminais.get(91).putIfAbsent(";", "r37");
-        entradasTerminais.get(91).putIfAbsent("end", "r37");
-
+        entradasTerminais.get(91).putIfAbsent("else", "r37");
+        
         // Estado 92
         entradasTerminais.get(92).putIfAbsent(";", "r44");
-        entradasTerminais.get(92).putIfAbsent("end", "r44");
-        entradasTerminais.get(92).putIfAbsent(")", "r44");
         entradasTerminais.get(92).putIfAbsent(",", "r44");
+        entradasTerminais.get(92).putIfAbsent(")", "r44");
         entradasTerminais.get(92).putIfAbsent("then", "r44");
+        entradasTerminais.get(92).putIfAbsent("else", "r44");
         entradasTerminais.get(92).putIfAbsent("to", "r44");
         entradasTerminais.get(92).putIfAbsent("do", "r44");
         entradasTerminais.get(92).putIfAbsent("and", "r44");
         entradasTerminais.get(92).putIfAbsent("or", "r44");
         entradasTerminais.get(92).putIfAbsent("xor", "r44");
-
+        
         // Estado 93
-        entradasTerminais.get(93).putIfAbsent("(", "e77");
-        entradasTerminais.get(93).putIfAbsent("numero", "e75");
-        entradasTerminais.get(93).putIfAbsent("variavel", "e76");
-        entradasTerminais.get(93).putIfAbsent("not", "e78");
-
-        // Estados 94 a 99
-        entradasTerminais.get(94).putIfAbsent("(", "r58");
-        entradasTerminais.get(95).putIfAbsent("(", "r59");
-        entradasTerminais.get(96).putIfAbsent("(", "e77");
-        entradasTerminais.get(97).putIfAbsent("(", "r60");
-        entradasTerminais.get(98).putIfAbsent("(", "r61");
-        entradasTerminais.get(99).putIfAbsent("(", "r62");
-
+        entradasTerminais.get(93).putIfAbsent(")", "e112");
+        entradasTerminais.get(93).putIfAbsent("or", "e86");
+        entradasTerminais.get(93).putIfAbsent("xor", "e87");
+        
+        // Estado 94
+        entradasTerminais.get(94).putIfAbsent("(", "e72");
+        entradasTerminais.get(94).putIfAbsent("variavel", "e73");
+        entradasTerminais.get(94).putIfAbsent("numero", "e77");
+        entradasTerminais.get(94).putIfAbsent("not", "e78");
+        
+        // Estado 95
+        entradasTerminais.get(95).putIfAbsent("(", "r58");
+        entradasTerminais.get(95).putIfAbsent("variavel", "r58");
+        entradasTerminais.get(95).putIfAbsent("numero", "r58");
+        entradasTerminais.get(95).putIfAbsent("not", "r58");
+        
+        // Estado 96
+        entradasTerminais.get(96).putIfAbsent("(", "r59");
+        entradasTerminais.get(96).putIfAbsent("variavel", "r59");
+        entradasTerminais.get(96).putIfAbsent("numero", "r59");
+        entradasTerminais.get(96).putIfAbsent("not", "r59");
+        
+        // Estado 97
+        entradasTerminais.get(97).putIfAbsent("(", "e72");
+        entradasTerminais.get(97).putIfAbsent("variavel", "e73");
+        entradasTerminais.get(97).putIfAbsent("numero", "e77");
+        entradasTerminais.get(97).putIfAbsent("not", "e78");
+        
+        // Estado 98
+        entradasTerminais.get(98).putIfAbsent("(", "r60");
+        entradasTerminais.get(98).putIfAbsent("variavel", "r60");
+        entradasTerminais.get(98).putIfAbsent("numero", "r60");
+        entradasTerminais.get(98).putIfAbsent("not", "r60");
+        
+        // Estado 99
+        entradasTerminais.get(99).putIfAbsent("(", "r61");
+        entradasTerminais.get(99).putIfAbsent("variavel", "r61");
+        entradasTerminais.get(99).putIfAbsent("numero", "r61");
+        entradasTerminais.get(99).putIfAbsent("not", "r61");
+        
         // Estado 100
-        entradasTerminais.get(100).putIfAbsent(")", "e114");
-        entradasTerminais.get(100).putIfAbsent("or", "e86");
-        entradasTerminais.get(100).putIfAbsent("xor", "e87");
-
+        entradasTerminais.get(100).putIfAbsent("(", "r62");
+        entradasTerminais.get(100).putIfAbsent("variavel", "r62");
+        entradasTerminais.get(100).putIfAbsent("numero", "r62");
+        entradasTerminais.get(100).putIfAbsent("not", "r62");
+        
         // Estado 101
         entradasTerminais.get(101).putIfAbsent(";", "r54");
-        entradasTerminais.get(101).putIfAbsent("end", "r54");
-
+        entradasTerminais.get(101).putIfAbsent(",", "r54");
+        entradasTerminais.get(101).putIfAbsent(")", "r54");
+        entradasTerminais.get(101).putIfAbsent("then", "r54");
+        entradasTerminais.get(101).putIfAbsent("else", "r54");
+        entradasTerminais.get(101).putIfAbsent("to", "r54");
+        entradasTerminais.get(101).putIfAbsent("do", "r54");
+        entradasTerminais.get(101).putIfAbsent("and", "r54");
+        entradasTerminais.get(101).putIfAbsent("+", "r54");
+        entradasTerminais.get(101).putIfAbsent("-", "r54");
+        entradasTerminais.get(101).putIfAbsent("*", "r54");
+        entradasTerminais.get(101).putIfAbsent("/", "r54");
+        entradasTerminais.get(101).putIfAbsent("%", "r54");
+        entradasTerminais.get(101).putIfAbsent("=", "r54");
+        entradasTerminais.get(101).putIfAbsent("<", "r54");
+        entradasTerminais.get(101).putIfAbsent(">", "r54");
+        entradasTerminais.get(101).putIfAbsent("<=", "r54");
+        entradasTerminais.get(101).putIfAbsent(">=", "r54");
+        entradasTerminais.get(101).putIfAbsent("<>", "r54");
+        entradasTerminais.get(101).putIfAbsent("or", "r54");
+        entradasTerminais.get(101).putIfAbsent("xor", "r54");
+        
         // Estado 102
         entradasTerminais.get(102).putIfAbsent("do", "e115");
-
+        
         // Estado 103
         entradasTerminais.get(103).putIfAbsent(";", "r39");
-        entradasTerminais.get(103).putIfAbsent("end", "r39");
-
+        entradasTerminais.get(103).putIfAbsent("else", "r39");
+        
         // Estado 104
-        entradasTerminais.get(104).putIfAbsent("begin", "r12");
         entradasTerminais.get(104).putIfAbsent("procedure", "r12");
-
+        entradasTerminais.get(104).putIfAbsent("begin", "r12");
+        
         // Estado 105
-        entradasTerminais.get(105).putIfAbsent(";", "r15");
-        entradasTerminais.get(105).putIfAbsent("end", "r15");
-
+        entradasTerminais.get(105).putIfAbsent(")", "r15");
+        
         // Estado 106
         entradasTerminais.get(106).putIfAbsent("tipo", "e116");
-
+        
         // Estado 107
-        entradasTerminais.get(107).putIfAbsent("and", "e88");
         entradasTerminais.get(107).putIfAbsent(";", "r40");
-        entradasTerminais.get(107).putIfAbsent("end", "r40");
-
+        entradasTerminais.get(107).putIfAbsent(",", "r40");
+        entradasTerminais.get(107).putIfAbsent(")", "r40");
+        entradasTerminais.get(107).putIfAbsent("else", "r40");
+        entradasTerminais.get(107).putIfAbsent("to", "r40");
+        entradasTerminais.get(107).putIfAbsent("and", "e88");
+        entradasTerminais.get(107).putIfAbsent("or", "r40");
+        entradasTerminais.get(107).putIfAbsent("xor", "r40");
+        
         // Estado 108
         entradasTerminais.get(108).putIfAbsent(";", "r42");
-        entradasTerminais.get(108).putIfAbsent("end", "r42");
-
+        entradasTerminais.get(108).putIfAbsent(",", "r42");
+        entradasTerminais.get(108).putIfAbsent(")", "r42");
+        entradasTerminais.get(108).putIfAbsent("else", "r42");
+        entradasTerminais.get(108).putIfAbsent("to", "r42");
+        entradasTerminais.get(108).putIfAbsent("and", "r42");
+        entradasTerminais.get(108).putIfAbsent("or", "r42");
+        entradasTerminais.get(108).putIfAbsent("xor", "r42");
+        
         // Estado 109
         entradasTerminais.get(109).putIfAbsent(")", "r33");
-
+        
         // Estado 110
         entradasTerminais.get(110).putIfAbsent(";", "r35");
-        entradasTerminais.get(110).putIfAbsent("end", "r35");
-
+        entradasTerminais.get(110).putIfAbsent("else", "r35");
+        
         // Estado 111
         entradasTerminais.get(111).putIfAbsent("begin", "e17");
-        entradasTerminais.get(111).putIfAbsent("for", "e34");
-        entradasTerminais.get(111).putIfAbsent("if", "e33");
-        entradasTerminais.get(111).putIfAbsent("proc", "e32");
         entradasTerminais.get(111).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(111).putIfAbsent("proc", "e32");
+        entradasTerminais.get(111).putIfAbsent("if", "e33");
+        entradasTerminais.get(111).putIfAbsent("for", "e34");
         entradasTerminais.get(111).putIfAbsent("while", "e35");
-
+        
         // Estado 112
-        entradasTerminais.get(112).putIfAbsent(";", "r47");
-        entradasTerminais.get(112).putIfAbsent("end", "r47");
-
-        // Estados 113 a 118 (Reduções finais)
-        for (int s = 113; s <= 118; s++) {
-            if (s == 115) {
-                entradasTerminais.get(s).putIfAbsent("begin", "e17");
-                entradasTerminais.get(s).putIfAbsent("for", "e34");
-                entradasTerminais.get(s).putIfAbsent("if", "e33");
-                entradasTerminais.get(s).putIfAbsent("proc", "e32");
-                entradasTerminais.get(s).putIfAbsent("variavel", "e31");
-                entradasTerminais.get(s).putIfAbsent("while", "e35");
-            } else if (s == 117) {
-                entradasTerminais.get(s).putIfAbsent(";", "r36");
-                entradasTerminais.get(s).putIfAbsent("end", "r36");
-            } else if (s == 118) {
-                entradasTerminais.get(s).putIfAbsent(";", "r38");
-                entradasTerminais.get(s).putIfAbsent("end", "r38");
-            } else {
-                entradasTerminais.get(s).putIfAbsent(";", "r53"); // r53/r60/r61/r62/etc.
-                entradasTerminais.get(s).putIfAbsent("end", "r53");
-            }
-        }
-    }
-
-    private void preencherNaoTerminais() {
-        entradasNaoTerminais.get(0).putIfAbsent("P", 1);
-        entradasNaoTerminais.get(4).putIfAbsent("B", 5);
-        entradasNaoTerminais.get(4).putIfAbsent("VAR_LIST", 6);
-        entradasNaoTerminais.get(6).putIfAbsent("PROC", 10);
-        entradasNaoTerminais.get(6).putIfAbsent("PROC_LIST", 9);
-        entradasNaoTerminais.get(7).putIfAbsent("ID_LIST", 14);
-        entradasNaoTerminais.get(7).putIfAbsent("VAR_DECL", 13);
-        entradasNaoTerminais.get(7).putIfAbsent("VAR_DECL_LIST", 12);
-        entradasNaoTerminais.get(9).putIfAbsent("C_SEC", 16);
-        entradasNaoTerminais.get(10).putIfAbsent("PROC", 10);
-        entradasNaoTerminais.get(10).putIfAbsent("PROC_LIST", 18);
-        entradasNaoTerminais.get(11).putIfAbsent("PA_LIST", 36);
-        entradasNaoTerminais.get(17).putIfAbsent("C", 24);
-        entradasNaoTerminais.get(17).putIfAbsent("C_LIST", 23);
-        entradasNaoTerminais.get(17).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(17).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(17).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(17).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(17).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(17).putIfAbsent("W", 29);
-        entradasNaoTerminais.get(20).putIfAbsent("ID_LIST", 14);
-        entradasNaoTerminais.get(20).putIfAbsent("VAR_DECL", 13);
-        entradasNaoTerminais.get(20).putIfAbsent("VAR_DECL_LIST", 38);
-        entradasNaoTerminais.get(22).putIfAbsent("ID_LIST", 40);
-        entradasNaoTerminais.get(34).putIfAbsent("VAR_ATR", 51);
-        entradasNaoTerminais.get(37).putIfAbsent("PA_DECL", 55);
-        entradasNaoTerminais.get(37).putIfAbsent("PA_DECL_LIST", 54);
-        entradasNaoTerminais.get(37).putIfAbsent("VAR_OPT", 56);
-        entradasNaoTerminais.get(42).putIfAbsent("C", 24);
-        entradasNaoTerminais.get(42).putIfAbsent("C_LIST", 58);
-        entradasNaoTerminais.get(42).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(42).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(42).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(42).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(42).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(42).putIfAbsent("W", 29);
-        entradasNaoTerminais.get(43).putIfAbsent("E", 61);
-        entradasNaoTerminais.get(43).putIfAbsent("EXPR", 59);
-        entradasNaoTerminais.get(43).putIfAbsent("LOG_TERM", 60);
-        entradasNaoTerminais.get(43).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(43).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(45).putIfAbsent("E", 61);
-        entradasNaoTerminais.get(45).putIfAbsent("E_LIST", 62);
-        entradasNaoTerminais.get(45).putIfAbsent("EXPR", 63);
-        entradasNaoTerminais.get(45).putIfAbsent("LOG_TERM", 60);
-        entradasNaoTerminais.get(45).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(45).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(47).putIfAbsent("REL_OP", 65);
-        entradasNaoTerminais.get(48).putIfAbsent("F", 74);
-        entradasNaoTerminais.get(48).putIfAbsent("SI_E_TAIL", 72);
-        entradasNaoTerminais.get(48).putIfAbsent("TERM", 73);
-        entradasNaoTerminais.get(53).putIfAbsent("B", 81);
-        entradasNaoTerminais.get(53).putIfAbsent("VAR_LIST", 6);
-        entradasNaoTerminais.get(56).putIfAbsent("ID_LIST", 84);
-        entradasNaoTerminais.get(64).putIfAbsent("C", 91);
-        entradasNaoTerminais.get(64).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(64).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(64).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(64).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(64).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(64).putIfAbsent("W", 29);
-        entradasNaoTerminais.get(65).putIfAbsent("SI_E", 92);
-        entradasNaoTerminais.get(65).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(72).putIfAbsent("ADD_OP", 93);
-        entradasNaoTerminais.get(73).putIfAbsent("MULT_OP", 96);
-        entradasNaoTerminais.get(77).putIfAbsent("E", 61);
-        entradasNaoTerminais.get(77).putIfAbsent("EXPR", 100);
-        entradasNaoTerminais.get(77).putIfAbsent("LOG_TERM", 60);
-        entradasNaoTerminais.get(77).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(77).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(78).putIfAbsent("F", 101);
-        entradasNaoTerminais.get(79).putIfAbsent("F", 102);
-        entradasNaoTerminais.get(80).putIfAbsent("C", 103);
-        entradasNaoTerminais.get(80).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(80).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(80).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(80).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(80).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(80).putIfAbsent("W", 29);
-        entradasNaoTerminais.get(83).putIfAbsent("PA_DECL", 55);
-        entradasNaoTerminais.get(83).putIfAbsent("PA_DECL_LIST", 105);
-        entradasNaoTerminais.get(83).putIfAbsent("VAR_OPT", 56);
-        entradasNaoTerminais.get(85).putIfAbsent("E", 61);
-        entradasNaoTerminais.get(85).putIfAbsent("LOG_TERM", 107);
-        entradasNaoTerminais.get(85).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(85).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(88).putIfAbsent("E", 108);
-        entradasNaoTerminais.get(88).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(88).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(90).putIfAbsent("E", 61);
-        entradasNaoTerminais.get(90).putIfAbsent("E_LIST", 109);
-        entradasNaoTerminais.get(90).putIfAbsent("EXPR", 63);
-        entradasNaoTerminais.get(90).putIfAbsent("LOG_TERM", 60);
-        entradasNaoTerminais.get(90).putIfAbsent("SI_E", 47);
-        entradasNaoTerminais.get(90).putIfAbsent("SIGN_OPT", 48);
-        entradasNaoTerminais.get(91).putIfAbsent("ELSE_OPT", 110);
-        entradasNaoTerminais.get(93).putIfAbsent("F", 74);
-        entradasNaoTerminais.get(93).putIfAbsent("TERM", 112);
-        entradasNaoTerminais.get(96).putIfAbsent("F", 113);
-        entradasNaoTerminais.get(111).putIfAbsent("C", 117);
-        entradasNaoTerminais.get(111).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(111).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(111).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(111).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(111).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(111).putIfAbsent("W", 29);
-        entradasNaoTerminais.get(115).putIfAbsent("C", 118);
-        entradasNaoTerminais.get(115).putIfAbsent("C_SEC", 30);
-        entradasNaoTerminais.get(115).putIfAbsent("FOR", 28);
-        entradasNaoTerminais.get(115).putIfAbsent("I", 27);
-        entradasNaoTerminais.get(115).putIfAbsent("PROC_CA", 26);
-        entradasNaoTerminais.get(115).putIfAbsent("VAR_ATR", 25);
-        entradasNaoTerminais.get(115).putIfAbsent("W", 29);
+        entradasTerminais.get(112).putIfAbsent(";", "r53");
+        entradasTerminais.get(112).putIfAbsent(",", "r53");
+        entradasTerminais.get(112).putIfAbsent(")", "r53");
+        entradasTerminais.get(112).putIfAbsent("then", "r53");
+        entradasTerminais.get(112).putIfAbsent("else", "r53");
+        entradasTerminais.get(112).putIfAbsent("to", "r53");
+        entradasTerminais.get(112).putIfAbsent("do", "r53");
+        entradasTerminais.get(112).putIfAbsent("and", "r53");
+        entradasTerminais.get(112).putIfAbsent("+", "r53");
+        entradasTerminais.get(112).putIfAbsent("-", "r53");
+        entradasTerminais.get(112).putIfAbsent("*", "r53");
+        entradasTerminais.get(112).putIfAbsent("/", "r53");
+        entradasTerminais.get(112).putIfAbsent("%", "r53");
+        entradasTerminais.get(112).putIfAbsent("=", "r53");
+        entradasTerminais.get(112).putIfAbsent("<", "r53");
+        entradasTerminais.get(112).putIfAbsent(">", "r53");
+        entradasTerminais.get(112).putIfAbsent("<=", "r53");
+        entradasTerminais.get(112).putIfAbsent(">=", "r53");
+        entradasTerminais.get(112).putIfAbsent("<>", "r53");
+        entradasTerminais.get(112).putIfAbsent("or", "r53");
+        entradasTerminais.get(112).putIfAbsent("xor", "r53");
+        
+        // Estado 113
+        entradasTerminais.get(113).putIfAbsent(";", "r47");
+        entradasTerminais.get(113).putIfAbsent(",", "r47");
+        entradasTerminais.get(113).putIfAbsent(")", "r47");
+        entradasTerminais.get(113).putIfAbsent("then", "r47");
+        entradasTerminais.get(113).putIfAbsent("else", "r47");
+        entradasTerminais.get(113).putIfAbsent("to", "r47");
+        entradasTerminais.get(113).putIfAbsent("do", "r47");
+        entradasTerminais.get(113).putIfAbsent("and", "r47");
+        entradasTerminais.get(113).putIfAbsent("+", "r47");
+        entradasTerminais.get(113).putIfAbsent("-", "r47");
+        entradasTerminais.get(113).putIfAbsent("*", "e98");
+        entradasTerminais.get(113).putIfAbsent("/", "e99");
+        entradasTerminais.get(113).putIfAbsent("%", "e100");
+        entradasTerminais.get(113).putIfAbsent("=", "r47");
+        entradasTerminais.get(113).putIfAbsent("<", "r47");
+        entradasTerminais.get(113).putIfAbsent(">", "r47");
+        entradasTerminais.get(113).putIfAbsent("<=", "r47");
+        entradasTerminais.get(113).putIfAbsent(">=", "r47");
+        entradasTerminais.get(113).putIfAbsent("<>", "r47");
+        entradasTerminais.get(113).putIfAbsent("or", "r47");
+        entradasTerminais.get(113).putIfAbsent("xor", "r47");
+        
+        // Estado 114
+        entradasTerminais.get(114).putIfAbsent(";", "r49");
+        entradasTerminais.get(114).putIfAbsent(",", "r49");
+        entradasTerminais.get(114).putIfAbsent(")", "r49");
+        entradasTerminais.get(114).putIfAbsent("then", "r49");
+        entradasTerminais.get(114).putIfAbsent("else", "r49");
+        entradasTerminais.get(114).putIfAbsent("to", "r49");
+        entradasTerminais.get(114).putIfAbsent("do", "r49");
+        entradasTerminais.get(114).putIfAbsent("and", "r49");
+        entradasTerminais.get(114).putIfAbsent("+", "r49");
+        entradasTerminais.get(114).putIfAbsent("-", "r49");
+        entradasTerminais.get(114).putIfAbsent("*", "r49");
+        entradasTerminais.get(114).putIfAbsent("/", "r49");
+        entradasTerminais.get(114).putIfAbsent("%", "r49");
+        entradasTerminais.get(114).putIfAbsent("=", "r49");
+        entradasTerminais.get(114).putIfAbsent("<", "r49");
+        entradasTerminais.get(114).putIfAbsent(">", "r49");
+        entradasTerminais.get(114).putIfAbsent("<=", "r49");
+        entradasTerminais.get(114).putIfAbsent(">=", "r49");
+        entradasTerminais.get(114).putIfAbsent("<>", "r49");
+        entradasTerminais.get(114).putIfAbsent("or", "r49");
+        entradasTerminais.get(114).putIfAbsent("xor", "r49");
+        
+        // Estado 115
+        entradasTerminais.get(115).putIfAbsent("begin", "e17");
+        entradasTerminais.get(115).putIfAbsent("variavel", "e31");
+        entradasTerminais.get(115).putIfAbsent("proc", "e32");
+        entradasTerminais.get(115).putIfAbsent("if", "e33");
+        entradasTerminais.get(115).putIfAbsent("for", "e34");
+        entradasTerminais.get(115).putIfAbsent("while", "e35");
+        
+        // Estado 116
+        entradasTerminais.get(116).putIfAbsent(";", "r17");
+        entradasTerminais.get(116).putIfAbsent(")", "r17");
+        
+        // Estado 117
+        entradasTerminais.get(117).putIfAbsent(";", "r36");
+        entradasTerminais.get(117).putIfAbsent("else", "r36");
+        
+        // Estado 118
+        entradasTerminais.get(118).putIfAbsent(";", "r38");
+        entradasTerminais.get(118).putIfAbsent("else", "r38");
     }
 }
