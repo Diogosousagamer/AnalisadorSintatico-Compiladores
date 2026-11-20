@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 21/10/2026
-* Ultima alteracao...: 17/11/2026
+* Ultima alteracao...: 20/11/2026
 * Nome...............: TelaPrincipalController
 * Funcao.............: Classe que gerencia as operacoes da TelaPrincipal.
                      
@@ -125,13 +125,34 @@ public class TelaPrincipalController {
 		}
 	}
 
+	/*
+     * ***************************************************************
+     * Metodo: registrarErro
+     * Funcao: registra um erro obtido durante a analise do codigo
+     * Parametros: RegistroErro erro - erro a ser registrado
+     * Retorno: void
+     ****************************************************************/
+
 	public void registrarErro(RegistroErro erro) {
+		// Adiciona o erro na lista de erros
 		erros.add(erro);
+
+		// Ordena a lista de erros pela linha obtida
 		erros.sort(Comparator.comparingInt(RegistroErro::getLinha));
 	}
 
+	/*
+     * ***************************************************************
+     * Metodo: exibirErros
+     * Funcao: exibe os erros registrados durante a analise na caixa de erros
+     * Parametros: nenhum parametro foi definido para esta funcao
+     * Retorno: void
+     ****************************************************************/
+
 	public void exibirErros() {
+		// Se a lista de erros nao estiver vazia
 		if (!erros.isEmpty()) {
+			// Imprime cada erro registrado na caixa de erros
 			for (RegistroErro e : erros) {
 				txtErros.appendText("Linha (" + Integer.toString(e.getLinha()) + "): " + e.getErro() + "\n");
 			}
@@ -158,7 +179,7 @@ public class TelaPrincipalController {
 			escreverCodigo();
 		});
 
-		// Realiza a analise
+		// Realiza a analise do codigo
 		analisadorSintatico.analisarCodigo(codigo);
 	}
 
@@ -191,8 +212,8 @@ public class TelaPrincipalController {
 	/*
      * ***************************************************************
      * Metodo: realizarAnaliseLexica
-     * Funcao: realiza a analise lexica do codigo
-     * Parametros: nenhum parametro foi definido para esta funcao
+     * Funcao: retorna os resultados da analise lexica do codigo
+     * Parametros: ArrayList<TuplaLexema> tuplas - lista de tuplas 
      * Retorno: void
      ****************************************************************/
 

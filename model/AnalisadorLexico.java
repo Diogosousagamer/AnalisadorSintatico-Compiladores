@@ -3,8 +3,8 @@
                        Diogo Oliveira de Sousa
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
-* Inicio.............: 25/08/2026
-* Ultima alteracao...: 17/10/2026
+* Inicio.............: 21/10/2026
+* Ultima alteracao...: 20/11/2026
 * Nome...............: AnalisadorLexico
 * Funcao.............: Classe que designa as operacoes do analisador lexico de um compilador.
                      

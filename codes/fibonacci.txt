@@ -13,10 +13,10 @@ begin
 				soma := anterior1 + anterior2;
 				anterior2 := anterior1;
 				anterior1 := soma;
-			end
+			end;
 	else
 		if n = 0 then
-			soma := anterior2
+			soma := anterior2;
 		else
 			soma := anterior1;
 
