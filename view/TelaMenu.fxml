@@ -19,7 +19,7 @@
                   <Font name="VCR OSD Mono" size="32.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" lineSpacing="4.0" prefHeight="64.0" prefWidth="582.0" styleClass="descricao" stylesheets="@../util/menu.css" text="Seja bem-vindo ao compilador do Mini Pascal, uma versão simplificada da linguagem Pascal. Envie seu código no fomato .txt para ser realizada a compilação por meio da análise léxica." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+            <Label alignment="CENTER" lineSpacing="4.0" prefHeight="79.0" prefWidth="582.0" styleClass="descricao" stylesheets="@../util/menu.css" text="Seja bem-vindo ao compilador do Mini Pascal, uma versão simplificada da linguagem Pascal. Envie seu código no fomato .txt para ser realizada a compilação por meio da análise léxica/sintática." textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
             <Button fx:id="btnEnviarArquivo" mnemonicParsing="false" onAction="#enviarArquivo" prefHeight="52.0" prefWidth="211.0" styleClass="botao-enviar" stylesheets="@../util/menu.css" text="Enviar Arquivo" VBox.vgrow="ALWAYS">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
