@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 01/11/2026
-* Ultima alteracao...: 20/11/2026
+* Ultima alteracao...: 22/11/2026
 * Nome...............: AnalisadorSintatico
 * Funcao.............: Classe que designa as operacoes do analisador sintatico de um compilador.
                      

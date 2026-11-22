@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 21/10/2026
-* Ultima alteracao...: 20/11/2026
+* Ultima alteracao...: 22/11/2026
 * Nome...............: TelaPrincipalController
 * Funcao.............: Classe que gerencia as operacoes da TelaPrincipal.
                      
@@ -152,10 +152,18 @@ public class TelaPrincipalController {
 	public void exibirErros() {
 		// Se a lista de erros nao estiver vazia
 		if (!erros.isEmpty()) {
+			// Troca a cor do texto pra vermelho atraves do ID no CSS
+			txtErros.setId("ocorrencia");
+
 			// Imprime cada erro registrado na caixa de erros
 			for (RegistroErro e : erros) {
 				txtErros.appendText("Linha (" + Integer.toString(e.getLinha()) + "): " + e.getErro() + "\n");
 			}
+		}
+		else {
+			// Caso contrario, retorna que nenhum erro foi encontrado com uma cor verde no texto
+			txtErros.setId("sem-erros");
+			txtErros.appendText("Nenhum erro encontrado.");
 		}
 	}
 

@@ -27,8 +27,20 @@
 	-fx-background-color: transparent;
 }
 
-#erros {
+#ocorrencia {
 	-fx-text-fill: #ff0000;
+}
+
+#ocorrencia .text {
+	-fx-fill: #ff0000;
+}
+
+#sem-erros {
+	-fx-text-fill: #00ff00;
+}
+
+#sem-erros .text {
+	-fx-fill: #00ff00;
 }
 
 .botao {

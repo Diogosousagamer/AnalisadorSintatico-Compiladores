@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 21/10/2026
-* Ultima alteracao...: 20/11/2026
+* Ultima alteracao...: 22/11/2026
 * Nome...............: AnalisadorLexico
 * Funcao.............: Classe que designa as operacoes do analisador lexico de um compilador.
                      
@@ -502,7 +502,9 @@ public class AnalisadorLexico {
 						final int numLinha = linha.contains(lexema) ? i + 1 : i;
 
 						// Exibe o erro encontrado na tela principal do programa se ele nao for nulo e vazio
-						if (erro != null && !erro.isEmpty()) Platform.runLater(() -> controller.registrarErro(new RegistroErro(numLinha, erro)));
+						if (erro != null && !erro.isEmpty()) {
+							controller.registrarErro(new RegistroErro(numLinha, erro));
+						}
 
 						// Reseta o lexema e o estado anterior e incrementa o contador
 						lexema = "";
