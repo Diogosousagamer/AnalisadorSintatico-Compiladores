@@ -4,7 +4,7 @@
                        Gustavo Henrique Oliveira Fernandes
 * Matricula..........: 202410855 / 202411226 / 202410104
 * Inicio.............: 01/11/2026
-* Ultima alteracao...: 22/11/2026
+* Ultima alteracao...: 23/11/2026
 * Nome...............: AnalisadorSintatico
 * Funcao.............: Classe que designa as operacoes do analisador sintatico de um compilador.
                      
@@ -139,6 +139,11 @@ public class AnalisadorSintatico {
 					// Obtem a regra e o seu lado esquerdo
 					RegraProducao regra = gramatica.obterRegraProducao(numeroRegra);
 					String naoTerminal = regra.getNaoTerminal();
+					String producao = regra.getProducao();
+
+					// Registra a regra reduzida
+					log.append(numeroRegra).append(") ").append(naoTerminal)
+						.append(" -> ").append(producao).append("\n");
 
 					// Decrementa o contador para que o elemento atual seja analisado
 					i--;
